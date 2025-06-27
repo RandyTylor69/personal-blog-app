@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  font-family: "Cascadia Mono", sans-serif;
+}
+
+body {
+  background-color: rgb(17, 17, 17);
+}
+
+.web-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(28, 28, 28);
+  justify-content: space-between;
+  height: 4rem;
+  width: 100%;
+  .header-container {
+    margin: auto;
+    display: flex;
+    width: 80vh;
+    max-width: 80vh;
+    justify-content: space-between;
+    .header-left {
+      display: flex;
+      align-items: center;
+      a {
+        text-decoration: none;
+        color: rgb(110, 130, 176);
+      }
+    }
+    .header-right {
+      display: flex;
+      gap: 2rem;
+
+      align-items: center;
+
+      a {
+        color: rgb(110, 130, 176);
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: 6rem;
+}
+
+.post-card {
+  height: 15rem;
+  width: 30rem;
+  border-radius: 2rem;
+  background-color: rgb(89, 82, 82);
+  margin: auto;
+}
