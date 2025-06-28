@@ -1,6 +1,7 @@
 * {
   margin: 0;
   font-family: "Cascadia Mono", sans-serif;
+  box-sizing: border-box;
 }
 
 body {
@@ -31,7 +32,7 @@ body {
     }
     .header-right {
       display: flex;
-      gap: 2rem;
+      gap: 3rem;
 
       align-items: center;
 
@@ -50,6 +51,42 @@ main {
   margin-top: 6rem;
 }
 
+.login-form {
+
+    margin: 10rem auto;
+    width: 80vh;
+    max-width: 80vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    input,button {
+        height: 4rem;
+        font-size: 2.5rem;
+        &::placeholder{
+            font-style: italic;
+            color: rgba(207, 207, 207, 0.2);
+        }
+        &:focus{
+            outline: none;
+        }
+    }
+    input {
+      background-color: rgb(35, 35, 35);
+      border: none;
+      color: white;
+    }
+    button {
+      background-color: rgb(144, 144, 144);
+      border: none;
+        &:hover{
+            cursor: pointer;
+            background-color: rgb(106, 105, 105);
+        }
+    }
+
+}
+
 .post-card {
   height: 15rem;
   width: 30rem;
@@ -57,3 +94,4 @@ main {
   background-color: rgb(89, 82, 82);
   margin: auto;
 }
+
