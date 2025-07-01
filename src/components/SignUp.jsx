@@ -16,7 +16,8 @@ export default function SignUp(props) {
         const errorObj = await res.json()
         throw new Error(errorObj.error);
       }
-      alert("successful signup!");
+      const data = await res.json();
+      alert(data.message)
     } catch (e) {
       alert(e.message);
     }

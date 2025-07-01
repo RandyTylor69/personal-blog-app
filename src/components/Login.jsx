@@ -24,7 +24,8 @@ export default function Login() {
         alert(errorMsg.error);
       }
       // logged in: 
-      alert("Successful log in! Redirecting you to the main page.");
+      const data = await res.json()
+      alert(data.message)
        setRedirect(true);
 
       
