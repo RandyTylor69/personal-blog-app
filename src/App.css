@@ -40,6 +40,8 @@ body {
 .web-header .header-container .header-right a {
   color: rgb(110, 130, 176);
   text-decoration: none;
+  font-size: 2rem;
+  cursor: pointer;
 }
 
 main {

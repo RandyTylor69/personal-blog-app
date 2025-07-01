@@ -4,30 +4,19 @@ import SignUp from "./components/SignUp";
 import Home from "./components/Home";
 import React from "react";
 
-import { Route,Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
 function App() {
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
-
+  const [username, setUsername] = React.useState(null)
+  console.log("current username:",username)
   return (
     <>
-      <Header />
+      <Header username = {username} setUsername = {setUsername}/>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
-          path="/signup"
-          element={
-            <SignUp setUsername={setUsername} setPassword={setPassword} />
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <Login setUsername={setUsername} setPassword={setPassword} />
-          }
-        />
+        <Route path="/signup" element={<SignUp username = {username} setUsername = {setUsername}/>}  />
+        <Route path="/login" element={<Login username = {username} setUsername = {setUsername}/>} />
       </Routes>
     </>
   );

@@ -1,4 +1,7 @@
+import { Navigate} from "react-router-dom";
+import React from "react";
 export default function SignUp(props) {
+   const [redirect, setRedirect] = React.useState(false);
   async function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -12,17 +15,22 @@ export default function SignUp(props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
       });
+      const data = await res.json()
       if (!res.ok) {
-        const errorObj = await res.json()
-        throw new Error(errorObj.error);
+        alert(data.error)
+        return;
       }
-      const data = await res.json();
-      alert(data.message)
+      alert("successful sign up!")
+      props.setUsername(data.username)
+      setRedirect(true)
+      
     } catch (e) {
       alert(e.message);
     }
   }
-
+  if (redirect){
+    return <Navigate to ={"/"} />
+  }
   return (
     <form onSubmit={handleSubmit} className="login-form">
       <input type="username" placeholder="username" name="username" required />
