@@ -1,4 +1,9 @@
+import { Navigate } from "react-router-dom";
+import React from "react";
+
+
 export default function Login() {
+  const [redirect, setRedirect] = React.useState(false);
   async function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -6,16 +11,30 @@ export default function Login() {
       formData.get("username"),
       formData.get("password"),
     ];
+    try {
+      const res = await fetch("http://localhost:3001/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+        credentials: "include"
+      });
+      if (!res.ok) {
+        // server responded a non-200 code
+        const errorMsg = await res.json(); // turns res into JSON string
+        alert(errorMsg.error);
+      }
+      // logged in: 
+      alert("Successful log in! Redirecting you to the main page.");
+       setRedirect(true);
 
-    fetch("http://localhost:3000/login", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }),
-    })
-      .then((res) => res.json())
-      .then((data) => alert("Log in successful :)"));
+      
+    } catch (e) {
+      console.error(e.message);
+    }
   }
-  return (
+  if (redirect) {
+    return <Navigate to={"/"} />;
+  } else return (
     <form onSubmit={handleSubmit} className="login-form">
       <input type="username" placeholder="username" name="username" />
       <input type="password" placeholder="password" name="password" />
