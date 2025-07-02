@@ -2,6 +2,7 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import Home from "./components/Home";
+import CreatePost from "./components/CreatePost";
 import React from "react";
 
 import { Route, Routes } from "react-router-dom";
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp username = {username} setUsername = {setUsername}/>}  />
         <Route path="/login" element={<Login username = {username} setUsername = {setUsername}/>} />
+        <Route path="/create" element={<CreatePost />} />
       </Routes>
     </>
   );

@@ -1,13 +1,17 @@
 import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
+import multer from "multer";
 import { User } from "./models/User.js";
+import { Post } from "./models/Post.js";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 
 const app = express(); // automatically parses JSON string into an object
 const PORT = 3001;
 const SECRET_KEY = "abdaeb12asdbaoqwubeqi123"; // I made this up
+const uploadMiddleware = multer({dest:"uploads/"})
+
 app.use(
   cors({
     credentials: true,
@@ -75,6 +79,22 @@ app.post("/logout", async (req, res) => {
   res.cookie("token", "").json({ message: "successful log out!" });
 });
 
+app.post("/create", uploadMiddleware.single("file"),async (req,res)=>{
+  try{
+    const {title, overview, content} = req.body
+    const filePath = req.file.path
+    const postDoc = await Post.create({title, overview, content, file:filePath})
+    res.status(201).json({message: "Post created!", postDoc})
+  } catch (err) {
+    res.status(500).json({message: "Error creating post"})
+  }
+})
+
+app.get("/create", async (req, res)=>{
+  // grabbing all the posts from database
+  const posts = await Post.find()
+  res.json(posts)
+})
 app.listen(PORT, () =>
   console.log(`Server is running on http://localhost:${PORT}`)
 );
