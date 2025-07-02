@@ -20,6 +20,7 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
+app.use("/uploads", express.static("uploads")) // serve files inside this folder when it's visited
 
 const mongoURI =
   "mongodb+srv://depayss:VNrrPo7BIS6briOX@blogdb.i5fkr5d.mongodb.net/?retryWrites=true&w=majority&appName=blogDB";

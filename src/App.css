@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: rgb(17, 17, 17);
+  background-color: rgb(23, 23, 23);
 }
 
 .web-header {
@@ -30,7 +30,7 @@ body {
 }
 .web-header .header-container .header-left a {
   text-decoration: none;
-  color: rgb(110, 130, 176);
+  color: rgb(131, 176, 135);
 }
 .web-header .header-container .header-right {
   display: flex;
@@ -38,7 +38,7 @@ body {
   align-items: center;
 }
 .web-header .header-container .header-right a {
-  color: rgb(110, 130, 176);
+  color: rgb(131, 176, 135);
   text-decoration: none;
   font-size: 2rem;
   cursor: pointer;
@@ -89,14 +89,6 @@ main {
 .login-form button:hover {
   cursor: pointer;
   background-color: rgb(106, 105, 105);
-}
-
-.post-card {
-  height: 15rem;
-  width: 30rem;
-  border-radius: 2rem;
-  background-color: rgb(89, 82, 82);
-  margin: auto;
 }
 
 .create-post-form {
@@ -166,4 +158,67 @@ main {
   border: none;
   border-radius: 0.5rem;
   color: rgb(207, 207, 170);
+}
+
+.post-card {
+  height: 30rem;
+  width: 30rem;
+  border-radius: 2rem;
+  margin: auto;
+  border: 0.4rem rgb(233, 234, 228) solid;
+}
+.post-card .post-card-header {
+  position: relative;
+  height: 15rem;
+  width: auto;
+}
+.post-card .post-card-header img {
+  position: absolute;
+  opacity: 0.4;
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 2rem;
+  filter: blur(0.2rem);
+  -webkit-mask-image: linear-gradient(black, transparent);
+  mask-image: linear-gradient(black, transparent);
+  z-index: 1;
+}
+.post-card .post-card-header h1 {
+  position: relative;
+  margin-left: 2rem;
+  z-index: 888;
+  color: rgb(233, 234, 228);
+  top: 14rem;
+}
+.post-card .post-card-body {
+  height: 15rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.post-card .post-card-body .overview-container {
+  height: 8rem;
+  margin-top: 3rem;
+}
+.post-card .post-card-body .overview-container p {
+  color: rgb(207, 207, 170);
+  font-weight: 350;
+}
+.post-card .post-card-body button {
+  border: none;
+  height: 2rem;
+  font-size: 1rem;
+  width: 10rem;
+  margin-top: 6rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  transition: 0.3s;
+  background-color: rgb(233, 234, 228);
+  color: black;
+}
+.post-card .post-card-body button:hover {
+  scale: 1.5;
 }/*# sourceMappingURL=App.css.map */
