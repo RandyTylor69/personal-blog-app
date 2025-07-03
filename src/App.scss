@@ -106,10 +106,18 @@ main {
     color: rgb(207, 207, 170, 0.2);
   }
 
+  .overview-area{
+    min-height: 15vh;
+    max-height: 15vh;
+  }
+
+  .content-area{
+    min-height: 50vh;
+  }
+
   textarea {
     max-width: 80vh;
     min-width: 80vh;
-    min-height: 20vh;
     padding: 2vh;
   }
 
@@ -158,17 +166,17 @@ main {
 
 .post-card {
   height: 30rem;
-  width: 30rem;
+  width: 40rem;
   border-radius: 2rem;
   margin: auto;
   border: 0.4rem rgb(233, 234, 228) solid;
 
   .post-card-header {
-    position:relative;
+    position: relative;
     height: 15rem;
     width: auto;
     img {
-      position:absolute;
+      position: absolute;
       opacity: 0.4;
       object-fit: cover;
       width: 100%;
@@ -190,6 +198,7 @@ main {
   }
 
   .post-card-body {
+    margin: 3rem;
     height: 15rem;
     display: flex;
     justify-content: center;
@@ -198,7 +207,7 @@ main {
 
     .overview-container {
       height: 8rem;
-      margin-top: 3rem;
+      
       p {
         color: rgb(207, 207, 170);
         font-weight: 350;
@@ -210,15 +219,67 @@ main {
       height: 2rem;
       font-size: 1rem;
       width: 10rem;
-      margin-top: 6rem;
       border-radius: 0.6rem;
       cursor: pointer;
       transition: 0.3s;
       background-color: rgb(233, 234, 228);
       color: black;
-      &:hover{
+      &:hover {
         scale: 1.5;
       }
     }
+  }
+}
+
+.loading {
+  color: rgb(131, 143, 176);
+  font-size: 2rem;
+}
+
+.post-page {
+  display: flex;
+  flex-direction: column;
+  max-width: 80vh;
+  margin: 5vh auto;
+
+  header {
+    display: flex;
+    flex-direction: column;
+
+    .header-words {
+      display: grid;
+      grid-template-columns: 80% 20%;
+      color: rgb(230, 229, 217);
+      h1 {
+        font-size: 5rem;
+      }
+      .overview {
+        margin: auto 0rem;
+        height: 80%;
+        border-left: 2px solid rgb(230, 229, 217, 0.3);
+        p {
+          color: rgb(230, 229, 217, 0.3);
+          margin: 1rem;
+          margin-right: 6;
+        }
+      }
+    }
+    .header-img {
+      height: 20rem;
+      margin: 2rem 0;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .username {
+    color: rgb(207, 207, 170);
+  }
+  .content {
+    margin: 2rem auto;
+    color: rgb(207, 207, 170);
   }
 }

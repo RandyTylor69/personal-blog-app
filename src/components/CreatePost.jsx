@@ -48,16 +48,21 @@ export default function CreatePost() {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         required
+        maxLength={60}
       />
-      <input
+      <textarea
+      className="overview-area"
         name="overview"
         placeholder="overview"
         value={overview}
         onChange={(e) => setOverview(e.target.value)}
         required
+        maxLength={200}
+        draggable="false"
       />
 
       <textarea
+      className="content-area"
         name="content"
         placeholder="Blog away..."
         value={content}
