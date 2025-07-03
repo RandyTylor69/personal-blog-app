@@ -18,14 +18,18 @@ export default function CreatePost() {
     formData.append("file", file)
 
     // fetch request
-
-    const res = await fetch("http://localhost:3001/create", {
+      const res = await fetch("http://localhost:3001/create", {
         method:"POST",
+        credentials: "include",
         body: formData,
     })
-
     const data = await res.json()
+    if (!res.ok){
+      alert(data.message)
+      console.error(data.error)
+    }
     alert(data.message)
+    console.log(data.userDoc)
     setRedirect(true)
   }
 

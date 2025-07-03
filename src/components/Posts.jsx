@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Posts() {
   const [posts, setPosts] = React.useState([]);
@@ -19,11 +20,12 @@ export default function Posts() {
         <div className="overview-container">
           <p>{post.overview}</p>
         </div>
-
-        <button>Read</button>
+        <Link to={`/post/${post._id}`}>
+          <button>Read</button>
+        </Link>
       </section>
     </div>
   ));
 
-  return <>{posts.length === 0 ? <h1>Nothing to see</h1> : <>{allPosts}</>}</>;
+  return <>{allPosts}</>
 }
