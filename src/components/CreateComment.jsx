@@ -4,7 +4,6 @@ export default function CreateComment(props) {
     e.preventDefault()
     const formData = new FormData(e.target)
     formData.append("postId", props.postId)
-    console.log(formData)
     // store the comment in the comments database
     const res = await fetch("http://localhost:3001/comments", {
       method: "POST",

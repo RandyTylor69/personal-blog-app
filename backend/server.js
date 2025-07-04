@@ -123,7 +123,9 @@ app.get("/create", async (req, res) => {
 app.get("/post/:id", async (req, res) => {
   const { id } = req.params;
   const post = await Post.findById(id).populate("author", "username");
-  res.json(post);
+  const comments = await Comment.find({post: new mongoose.Types.ObjectId(id)}).populate("author", "username")
+  const postPackage = {post, comments}
+  res.json(postPackage);
 });
 
 // access comments databse
@@ -144,10 +146,10 @@ app.post("/comments", uploadMiddleware.none(), async(req, res)=>{
   const commentDoc = Comment.create({
     content: content,
     author: userId,
-    postId : postId
+    post : postId
   })
 
-  res.status(200).json({message: "Your comment is now live!"})
+  res.status(200).json({message: "Your comment is now live!", commentDoc})
 
   } catch (err) {
     res.status(401).json({message: err.message})

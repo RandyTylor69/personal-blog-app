@@ -249,11 +249,10 @@ main {
   color: rgb(230, 229, 217);
 }
 .post-page header .header-words h1 {
-  font-size: 5rem;
+  font-size: 4.5rem;
 }
 .post-page header .header-words .overview {
   margin: auto 0rem;
-  height: 80%;
   border-left: 2px solid rgba(230, 229, 217, 0.3);
 }
 .post-page header .header-words .overview p {
@@ -313,4 +312,26 @@ main {
 .comment-form button:hover {
   background-color: rgb(230, 229, 217);
   color: rgb(23, 23, 23);
+}
+
+.comments-page {
+  margin-top: 2rem;
+  max-width: 80vh;
+}
+.comments-page h3 {
+  margin-top: 1rem;
+  color: rgb(230, 229, 217);
+}
+.comments-page .comments-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  gap: 1rem;
+}
+.comments-page .comments-container .comment {
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+  padding-top: 0.5rem;
+}
+.comments-page .comments-container .comment p {
+  color: rgb(230, 229, 217);
 }/*# sourceMappingURL=App.css.map */
