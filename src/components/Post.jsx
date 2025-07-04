@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import CreateComment from "./CreateComment";
 import React from "react";
 
-export default function Post() {
+export default function Post(props) {
   // grab all post information from post id
   const { id } = useParams();
   const [postData, setPostData] = React.useState(null);
@@ -35,6 +36,11 @@ export default function Post() {
       </header>
       <h3 className="username">{`Written by ${postData.author.username}`}</h3>
       <p className="content">{content}</p>
+        <CreateComment 
+        postId = {id}
+        isLoggedIn = {props.username}
+        />
+      
     </div>
   );
 }

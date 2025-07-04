@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import multer from "multer";
 import { User } from "./models/User.js";
 import { Post } from "./models/Post.js";
+import { Comment } from "./models/Comment.js";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 
@@ -124,6 +125,35 @@ app.get("/post/:id", async (req, res) => {
   const post = await Post.findById(id).populate("author", "username");
   res.json(post);
 });
+
+// access comments databse
+app.post("/comments", uploadMiddleware.none(), async(req, res)=>{
+  // extracts 3 parts of the request body: 
+  // user id, post id, content
+  try{
+     //  1. user id
+  const token = req.cookies.token;
+  const decodedToken = jwt.verify(token, SECRET_KEY)
+  const userId = decodedToken.id
+
+  // 2. post id + content
+  const {content, postId} = req.body
+
+  // creating the comment document
+
+  const commentDoc = Comment.create({
+    content: content,
+    author: userId,
+    postId : postId
+  })
+
+  res.status(200).json({message: "Your comment is now live!"})
+
+  } catch (err) {
+    res.status(401).json({message: err.message})
+  }
+ 
+})
 
 app.listen(PORT, () =>
   console.log(`Server is running on http://localhost:${PORT}`)

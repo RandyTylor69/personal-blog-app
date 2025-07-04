@@ -10,13 +10,8 @@ export default function CreatePost() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
-    const formData = new FormData()
-    formData.append("title", title)
-    formData.append("overview", overview)
-    formData.append("content", content)
-    formData.append("file", file)
-
+    const formData = new FormData(e.target)
+    
     // fetch request
       const res = await fetch("http://localhost:3001/create", {
         method:"POST",
@@ -32,6 +27,8 @@ export default function CreatePost() {
     console.log(data.userDoc)
     setRedirect(true)
   }
+
+
 
   if (redirect) {
     return <Navigate to={"/"} />
@@ -74,6 +71,7 @@ export default function CreatePost() {
           Optional cover image{" "}
         </label>
         <input
+        name="file"
         id="file"
           type="file"
           placeholder="upload"
