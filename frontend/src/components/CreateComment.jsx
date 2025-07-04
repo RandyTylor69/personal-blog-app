@@ -1,3 +1,4 @@
+
 export default function CreateComment(props) {
 
   async function handleSubmit(e){
@@ -11,11 +12,12 @@ export default function CreateComment(props) {
       body: formData
     })
 
+    
+
     const data = await res.json()
     alert(data.message)
     window.location.reload()
   }
-
   return (
     <form className="comment-form" onSubmit={handleSubmit}>
       {props.isLoggedIn ? (

@@ -7,10 +7,13 @@ import { Post } from "./models/Post.js";
 import { Comment } from "./models/Comment.js";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
+import { config } from "dotenv";
+
+config()
 
 const app = express(); // automatically parses JSON string into an object
-const PORT = 3001;
-const SECRET_KEY = "abdaeb12asdbaoqwubeqi123"; // I made this up
+const PORT = process.env.PORT 
+const SECRET_KEY = process.env.SECRET_KEY
 const uploadMiddleware = multer({ dest: "uploads/" });
 
 app.use(
@@ -23,8 +26,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static("uploads")); // serve files inside this folder when it's visited
 
-const mongoURI =
-  "mongodb+srv://depayss:VNrrPo7BIS6briOX@blogdb.i5fkr5d.mongodb.net/?retryWrites=true&w=majority&appName=blogDB";
+const mongoURI = process.env.MONGODB_URI
 mongoose.connect(mongoURI);
 
 app.post("/signup", async (req, res) => {
@@ -161,7 +163,3 @@ app.listen(PORT, () =>
   console.log(`Server is running on http://localhost:${PORT}`)
 );
 
-// mongoDB info
-// pw: VNrrPo7BIS6briOX
-// un: depayss
-// connection string: mongodb+srv://depayss:VNrrPo7BIS6briOX@blogdb.i5fkr5d.mongodb.net/?retryWrites=true&w=majority&appName=blogDB
