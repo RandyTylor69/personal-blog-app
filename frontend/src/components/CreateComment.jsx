@@ -13,7 +13,7 @@ export default function CreateComment(props) {
 
     const data = await res.json()
     alert(data.message)
-    window.location.href=""
+    window.location.reload()
   }
 
   return (
@@ -33,4 +33,7 @@ export default function CreateComment(props) {
             placeholder="Need to log in first in order to comment :)"
             disabled
         ></textarea>
-   
+      )}
+    </form>
+  );
+}
