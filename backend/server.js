@@ -19,7 +19,7 @@ const uploadMiddleware = multer({ dest: "uploads/" });
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:3000","https://personal-blog-app-tau.vercel.app/"]
+    origin: ["http://localhost:3000","https://personal-blog-app-tau.vercel.app"]
   })
 );
 app.use(express.json());
