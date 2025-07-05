@@ -5,7 +5,7 @@ export default function Posts() {
   const [posts, setPosts] = React.useState([]);
 
   React.useEffect(() => {
-    fetch("http://localhost:3001/create")
+    fetch(`${process.env.REACT_APP_SERVER_URL}/create`)
       .then((res) => res.json())
       .then((data) => setPosts(data));
   }, []);
@@ -13,7 +13,7 @@ export default function Posts() {
   const allPosts = posts.map((post, key) => (
     <div className="post-card">
       <section className="post-card-header">
-        <img src={`http://localhost:3001/${post.file}`} />
+        <img src={`${process.env.REACT_APP_SERVER_URL}/${post.file}`} />
         <h1>{post.title}</h1>
       </section>
       <section className="post-card-body">

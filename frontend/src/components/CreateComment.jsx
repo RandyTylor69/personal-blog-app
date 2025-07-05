@@ -6,7 +6,7 @@ export default function CreateComment(props) {
     const formData = new FormData(e.target)
     formData.append("postId", props.postId)
     // store the comment in the comments database
-    const res = await fetch("http://localhost:3001/comments", {
+    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/comments`, {
       method: "POST",
       credentials: "include",
       body: formData

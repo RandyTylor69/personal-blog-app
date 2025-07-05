@@ -10,7 +10,7 @@ export default function Post(props) {
   const [commentData, setCommentData] = React.useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/post/${id}`)
+    fetch(`${process.env.REACT_APP_SERVER_URL}/post/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setPostData(data.post);
@@ -48,7 +48,7 @@ export default function Post(props) {
           </div>
         </div>
         <div className="header-img">
-          <img src={`http://localhost:3001/${postData.file}`} />
+          <img src={`${process.env.REACT_APP_SERVER_URL}/${postData.file}`} />
         </div>
       </header>
       <h3 className="username">{`Written by ${postData.author.username}`}</h3>

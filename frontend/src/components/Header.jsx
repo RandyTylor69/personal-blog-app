@@ -5,7 +5,7 @@ export default function Header(props) {
 
   React.useEffect(() => {
     async function checkLogin() {
-      const res = await fetch("http://localhost:3001/profile", {
+      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/profile`, {
         credentials: "include",
       });
       const data = await res.json();
@@ -20,7 +20,7 @@ export default function Header(props) {
   }, []);
   
   async function logout(){
-    const res = await fetch("http://localhost:3001/logout", {
+    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/logout`, {
       method: "POST",
       credentials: "include"
     })

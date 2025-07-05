@@ -13,7 +13,7 @@ export default function CreatePost() {
     const formData = new FormData(e.target)
     
     // fetch request
-      const res = await fetch("http://localhost:3001/create", {
+      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/create`, {
         method:"POST",
         credentials: "include",
         body: formData,
