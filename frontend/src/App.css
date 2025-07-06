@@ -277,6 +277,7 @@ main {
   white-space: pre;
   margin: 2rem auto;
   color: rgb(207, 207, 170);
+  width: 80vh;
   min-width: 80vh;
 }
 
