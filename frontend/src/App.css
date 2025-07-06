@@ -284,6 +284,7 @@ main {
   max-width: 80vh;
 }
 .comment-form textarea {
+  white-space: pre;
   background-color: rgba(70, 70, 70, 0.5);
   border: none;
   border-radius: 1rem;
