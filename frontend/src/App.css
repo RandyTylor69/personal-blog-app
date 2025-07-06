@@ -253,6 +253,7 @@ main {
 }
 .post-page header .header-words .overview {
   margin: auto 0rem;
+  padding-left: 0.5rem;
   border-left: 2px solid rgba(230, 229, 217, 0.3);
 }
 .post-page header .header-words .overview p {
