@@ -68,7 +68,7 @@ export default function CreatePost() {
       />
       <div className="submit-class">
         <label for="file" className="file-class">
-          Optional cover image{" "}
+          Conver Image
         </label>
         <input
         name="file"

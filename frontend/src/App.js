@@ -11,7 +11,6 @@ import "./App.css";
 
 function App() {
   const [username, setUsername] = React.useState(null)
-  console.log(process.env.REACT_APP_SERVER_URL)
   return (
     <>
       <Header username = {username} setUsername = {setUsername}/>

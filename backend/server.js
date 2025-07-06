@@ -9,24 +9,27 @@ import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import { config } from "dotenv";
 
-config()
+config();
 
 const app = express(); // automatically parses JSON string into an object
-const PORT = process.env.PORT 
-const SECRET_KEY = process.env.SECRET_KEY
+const PORT = process.env.PORT;
+const SECRET_KEY = process.env.SECRET_KEY;
 const uploadMiddleware = multer({ dest: "uploads/" });
 
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:3000","https://personal-blog-app-tau.vercel.app"]
+    origin: [
+      "http://localhost:3000",
+      "https://personal-blog-app-tau.vercel.app",
+    ],
   })
 );
 app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static("uploads")); // serve files inside this folder when it's visited
 
-const mongoURI = process.env.MONGODB_URI
+const mongoURI = process.env.MONGODB_URI;
 mongoose.connect(mongoURI);
 
 app.post("/signup", async (req, res) => {
@@ -48,10 +51,10 @@ app.post("/login", async (req, res) => {
     const { username, password } = req.body;
     // trying to find the matching user
     const userDoc = await User.findOne({ username });
-    if (password !== userDoc.password) {
-      res.status(400).json({ error: "wrong password~ please try again~" });
-    } else if (!userDoc) {
+    if (!userDoc) {
       res.status(400).json({ error: "user does not exist~" });
+    } else if (password !== userDoc.password) {
+      res.status(400).json({ error: "wrong password~ please try again~" });
     } else {
       // if logged in
       const token = jwt.sign(
@@ -63,7 +66,7 @@ app.post("/login", async (req, res) => {
         .json({ message: "successful log in!", username: userDoc.username });
     }
   } catch (err) {
-    console.log(err.errorResponse.errmsg);
+    console.log(err);
   }
 });
 
@@ -92,8 +95,8 @@ app.post("/create", uploadMiddleware.single("file"), async (req, res) => {
     const filePath = req.file.path;
     // 2. user id
     const token = req.cookies.token;
-    const decodedToken = jwt.verify(token, SECRET_KEY)
-    const userId = decodedToken.id
+    const decodedToken = jwt.verify(token, SECRET_KEY);
+    const userId = decodedToken.id;
     // 3. everything else
     const { title, overview, content } = req.body;
 
@@ -102,14 +105,14 @@ app.post("/create", uploadMiddleware.single("file"), async (req, res) => {
       overview,
       content,
       file: filePath,
-      author: userId
+      author: userId,
     });
 
-    res.status(201).json({ message: "Post created!", postDoc});
+    res.status(201).json({ message: "Post created!", postDoc });
   } catch (err) {
-    res.status(500).json({ 
+    res.status(500).json({
       message: "Error occured while creating your post",
-      error:err.message
+      error: err.message,
     });
   }
 });
@@ -125,41 +128,40 @@ app.get("/create", async (req, res) => {
 app.get("/post/:id", async (req, res) => {
   const { id } = req.params;
   const post = await Post.findById(id).populate("author", "username");
-  const comments = await Comment.find({post: new mongoose.Types.ObjectId(id)}).populate("author", "username")
-  const postPackage = {post, comments}
+  const comments = await Comment.find({
+    post: new mongoose.Types.ObjectId(id),
+  }).populate("author", "username");
+  const postPackage = { post, comments };
   res.json(postPackage);
 });
 
 // access comments databse
-app.post("/comments", uploadMiddleware.none(), async(req, res)=>{
-  // extracts 3 parts of the request body: 
+app.post("/comments", uploadMiddleware.none(), async (req, res) => {
+  // extracts 3 parts of the request body:
   // user id, post id, content
-  try{
-     //  1. user id
-  const token = req.cookies.token;
-  const decodedToken = jwt.verify(token, SECRET_KEY)
-  const userId = decodedToken.id
+  try {
+    //  1. user id
+    const token = req.cookies.token;
+    const decodedToken = jwt.verify(token, SECRET_KEY);
+    const userId = decodedToken.id;
 
-  // 2. post id + content
-  const {content, postId} = req.body
+    // 2. post id + content
+    const { content, postId } = req.body;
 
-  // creating the comment document
+    // creating the comment document
 
-  const commentDoc = Comment.create({
-    content: content,
-    author: userId,
-    post : postId
-  })
+    const commentDoc = Comment.create({
+      content: content,
+      author: userId,
+      post: postId,
+    });
 
-  res.status(200).json({message: "Your comment is now live!", commentDoc})
-
+    res.status(200).json({ message: "Your comment is now live!", commentDoc });
   } catch (err) {
-    res.status(401).json({message: err.message})
+    res.status(401).json({ message: err.message });
   }
- 
-})
+});
 
 app.listen(PORT, () =>
   console.log(`Server is running on http://localhost:${PORT}`)
 );
-
