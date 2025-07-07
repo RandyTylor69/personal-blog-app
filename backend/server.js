@@ -120,7 +120,7 @@ app.post("/create", uploadMiddleware.single("file"), async (req, res) => {
       ContentType: req.file.mimetype, // content type
     })
     // 1.2 creating the img URL (that can be visited anywhere on the web)
-    const imageURL = `https://${BUCKET_NAME}.s3.amazonaws.com/imgs/${randomImgName}`
+    const imageURL = `https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/imgs/${randomImgName}`
     // 1.3 uploading the image to Amazon S3 Bucket
     await s3.send(command)
 
