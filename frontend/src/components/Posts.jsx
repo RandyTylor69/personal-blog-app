@@ -10,10 +10,12 @@ export default function Posts() {
       .then((data) => setPosts(data));
   }, []);
 
+  console.log(posts)
+
   const allPosts = posts.map((post, key) => (
     <div className="post-card">
       <section className="post-card-header">
-        <img src={`${process.env.REACT_APP_SERVER_URL}/${post.file}`} />
+        <img src={post.file} />
         <h1>{post.title}</h1>
       </section>
       <section className="post-card-body">

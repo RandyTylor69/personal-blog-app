@@ -21,10 +21,9 @@ export default function CreatePost() {
     const data = await res.json()
     if (!res.ok){
       alert(data.message)
-      console.error(data.error)
+      return;
     }
     alert(data.message)
-    console.log(data.userDoc)
     setRedirect(true)
   }
 

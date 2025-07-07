@@ -8,13 +8,33 @@ import { Comment } from "./models/Comment.js";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import { config } from "dotenv";
+import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
+import crypto from "crypto"
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 config();
 
 const app = express(); // automatically parses JSON string into an object
 const PORT = process.env.PORT;
 const SECRET_KEY = process.env.SECRET_KEY;
-const uploadMiddleware = multer({ dest: "uploads/" });
+const BUCKET_NAME= process.env.BUCKET_NAME
+const BUCKET_REGION=process.env.BUCKET_REGION
+const AWS_ACCESS_KEY=process.env.AWS_ACCESS_KEY
+const SECRET_AWS_ACCESS_KEY=process.env.SECRET_AWS_ACCESS_KEY
+const storage = multer.memoryStorage();
+const uploadMiddleware = multer({ storage: storage });
+
+function randomImgNameGenerator(){
+  return crypto.randomBytes(10).toString('hex')
+}
+
+const s3 = new S3Client({
+  credentials:{
+    accessKeyId: AWS_ACCESS_KEY,
+    secretAccessKey: SECRET_AWS_ACCESS_KEY
+  },
+  region: BUCKET_REGION
+})
 
 app.use(
   cors({
@@ -27,7 +47,6 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
-app.use("/uploads", express.static("uploads")); // serve files inside this folder when it's visited
 
 const mongoURI = process.env.MONGODB_URI;
 mongoose.connect(mongoURI);
@@ -89,22 +108,36 @@ app.post("/logout", async (req, res) => {
 app.post("/create", uploadMiddleware.single("file"), async (req, res) => {
   try {
     // we have to extract the form data into 3 parts:
+    
     // image file, user id, and everything else.
 
-    // 1. image file
-    const filePath = req.file.path;
-    // 2. user id
+    const randomImgName = randomImgNameGenerator()
+
+    // 1. Creating the Image Object
+    const command = new PutObjectCommand({
+      Bucket: BUCKET_NAME, // destination
+      Key: `imgs/${randomImgName}`, // S3 doesn't allow 2 images of the same name
+      Body: req.file.buffer, // file body
+      ContentType: req.file.mimetype, // content type
+    })
+    // 1.2 creating the img URL (that can be visited anywhere on the web)
+    const imageURL = `https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/imgs/${randomImgName}`
+    // 1.3 uploading the image to Amazon S3 Bucket
+    await s3.send(command)
+
+    // 2. Aquiring User Id (Who Created the Post)
     const token = req.cookies.token;
     const decodedToken = jwt.verify(token, SECRET_KEY);
     const userId = decodedToken.id;
-    // 3. everything else
+
+    // 3. everything else (See the params below)
     const { title, overview, content } = req.body;
 
     const postDoc = await Post.create({
       title,
       overview,
       content,
-      file: filePath,
+      file: imageURL,
       author: userId,
     });
 

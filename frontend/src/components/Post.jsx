@@ -48,7 +48,7 @@ export default function Post(props) {
           </div>
         </div>
         <div className="header-img">
-          <img src={`${process.env.REACT_APP_SERVER_URL}/${postData.file}`} />
+          <img src={postData.file} />
         </div>
       </header>
       <h3 className="username">{`Written by ${postData.author.username}`}</h3>
