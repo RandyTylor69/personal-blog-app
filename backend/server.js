@@ -55,11 +55,14 @@ app.post("/signup", async (req, res) => {
     const { username, password } = req.body;
     const userDoc = await User.create({ username, password });
     res.json(userDoc);
+    
   } catch (err) {
-    if (err.errorResponse.errmsg.includes("duplicate")) {
+    
+    if (err.errorResponse.errmsg.includes("username" && "duplicate")) {
       res
         .status(400)
-        .json({ error: "user already exists! try log in instead" });
+         .json({ error:err.errorResponse.errmsg });
+        //.json({ error: "Username taken! Login or get a new one :)" });
     }
   }
 });
@@ -88,7 +91,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.get("/profile", async (req, res) => {
+app.get("/checkLogin", async (req, res) => {
   const { token } = req.cookies;
   jwt.verify(token, SECRET_KEY, (err, userInfo) => {
     if (err) {
@@ -151,6 +154,7 @@ app.post("/create", uploadMiddleware.single("file"), async (req, res) => {
 
 app.get("/create", async (req, res) => {
   // grabbing all the posts from database
+  // and sending them to the frontend
   const posts = await Post.find();
   res.json(posts);
 });

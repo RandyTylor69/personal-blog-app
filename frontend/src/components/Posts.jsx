@@ -1,18 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Posts() {
-  const [posts, setPosts] = React.useState([]);
+export default function Posts(props) {
 
   React.useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVER_URL}/create`)
       .then((res) => res.json())
-      .then((data) => setPosts(data));
+      .then((data) => props.setPosts(data));
   }, []);
 
-  console.log(posts)
-
-  const allPosts = posts.map((post, key) => (
+  const allPosts = props.posts.map((post, key) => (
     <div className="post-card">
       <section className="post-card-header">
         <img src={post.file} />

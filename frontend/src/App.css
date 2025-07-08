@@ -167,7 +167,7 @@ main {
 }
 
 .post-card {
-  height: 30rem;
+  height: 20rem;
   width: 40rem;
   border-radius: 2rem;
   margin: auto;
@@ -175,7 +175,7 @@ main {
 }
 .post-card .post-card-header {
   position: relative;
-  height: 15rem;
+  height: 10rem;
   width: auto;
 }
 .post-card .post-card-header img {
@@ -196,11 +196,11 @@ main {
   margin-left: 2rem;
   z-index: 888;
   color: rgb(233, 234, 228);
-  top: 14rem;
+  top: 9rem;
 }
 .post-card .post-card-body {
   margin: 3rem;
-  height: 15rem;
+  height: 7.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -339,4 +339,131 @@ main {
 }
 .comments-page .comments-container .comment p {
   color: rgb(230, 229, 217);
+}
+
+.profile-section {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.profile-section h1 {
+  color: rgb(230, 229, 217);
+  font-size: 3rem;
+}
+.profile-section .posts-overview {
+  background-color: rgb(18, 18, 18);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2rem;
+  gap: 1.5rem;
+}
+.profile-section .posts-overview h2 {
+  color: rgb(230, 229, 217);
+}
+.profile-section .posts-overview .title-section {
+  display: flex;
+  width: 30rem;
+}
+.profile-section .posts-overview .title-section h2 {
+  text-decoration: underline;
+}
+.profile-section .posts-overview .post-title-card {
+  display: flex;
+  width: 30rem;
+  justify-content: space-around;
+}
+.profile-section .posts-overview .post-title-card p {
+  color: rgb(230, 229, 217);
+  overflow-x: auto;
+}
+.profile-section .posts-overview .post-title-card .options {
+  display: flex;
+  gap: 1rem;
+}
+.profile-section .posts-overview .post-title-card .options button {
+  width: 10vh;
+  height: 3vh;
+  border: solid 2px rgb(230, 229, 217);
+  color: rgb(230, 229, 217);
+  border-radius: 1rem;
+  cursor: pointer;
+  background-color: transparent;
+  transition: 0.3s;
+}
+.profile-section .posts-overview .post-title-card .options button:hover {
+  background-color: rgb(230, 229, 217);
+  color: rgb(23, 23, 23);
+}
+.profile-section .log-out-button {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 14vh;
+  height: 3vh;
+  border: solid 2px rgb(230, 229, 217);
+  color: rgb(230, 229, 217);
+  border-radius: 0.2rem;
+  cursor: pointer;
+  background-color: transparent;
+  transition: 0.3s;
+}
+.profile-section .log-out-button:hover {
+  background-color: rgb(230, 229, 217);
+  color: rgb(23, 23, 23);
+}
+
+.delete-warning {
+  position: absolute;
+  z-index: 9999;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20rem;
+  left: 0;
+  right: 0;
+  background-color: rgb(48, 49, 54);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  height: 8rem;
+  width: 25rem;
+  padding: 1rem;
+  border-radius: 2rem;
+  border: rgb(230, 229, 217) 2px solid;
+}
+.delete-warning p {
+  color: rgb(233, 88, 62);
+  font-weight: 400;
+}
+.delete-warning .warning-buttons {
+  margin-top: 1rem;
+  width: 16rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.delete-warning .warning-buttons button {
+  margin-top: 0.5rem;
+  width: 10vh;
+  height: 3vh;
+  border: solid 2px rgb(230, 229, 217);
+  color: rgb(230, 229, 217);
+  border-radius: 1rem;
+  cursor: pointer;
+  background-color: transparent;
+  transition: 0.3s;
+}
+.delete-warning .warning-buttons button:hover {
+  background-color: rgb(230, 229, 217);
+  color: rgb(23, 23, 23);
 }/*# sourceMappingURL=App.css.map */

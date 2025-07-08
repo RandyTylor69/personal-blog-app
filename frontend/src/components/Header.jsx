@@ -4,8 +4,10 @@ import React from "react";
 export default function Header(props) {
 
   React.useEffect(() => {
+    // check if the user is logged in whenever the page refreshes.
+    // this makes sure the header stays updated (showing diff components)
     async function checkLogin() {
-      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/profile`, {
+      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/checkLogin`, {
         credentials: "include",
       });
       const data = await res.json();
@@ -18,16 +20,7 @@ export default function Header(props) {
     }
     checkLogin();
   }, []);
-  
-  async function logout(){
-    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/logout`, {
-      method: "POST",
-      credentials: "include"
-    })
-    const data = await res.json()
-    if (res.ok) alert(data.message)
-    props.setUsername(null)
-  }
+
 
   return (
     <header className="web-header">
@@ -44,7 +37,9 @@ export default function Header(props) {
               <Link to={"/create"}>
                 Write New Post
               </Link>
-              <a onClick={logout}>Log out</a>
+              <Link to={"/profile"}>
+              {props.username}
+              </Link>
             </>
           ) : (
             // if not logged in
