@@ -8,32 +8,32 @@ import { Comment } from "./models/Comment.js";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import { config } from "dotenv";
-import { S3Client, PutObjectCommand} from "@aws-sdk/client-s3";
-import crypto from "crypto"
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import crypto from "crypto";
 
 config();
 
 const app = express(); // automatically parses JSON string into an object
 const PORT = process.env.PORT;
 const SECRET_KEY = process.env.SECRET_KEY;
-const BUCKET_NAME= process.env.BUCKET_NAME
-const BUCKET_REGION=process.env.BUCKET_REGION
-const AWS_ACCESS_KEY=process.env.AWS_ACCESS_KEY
-const SECRET_AWS_ACCESS_KEY=process.env.SECRET_AWS_ACCESS_KEY
+const BUCKET_NAME = process.env.BUCKET_NAME;
+const BUCKET_REGION = process.env.BUCKET_REGION;
+const AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
+const SECRET_AWS_ACCESS_KEY = process.env.SECRET_AWS_ACCESS_KEY;
 const storage = multer.memoryStorage();
 const uploadMiddleware = multer({ storage: storage });
 
-function randomImgNameGenerator(){
-  return crypto.randomBytes(10).toString('hex')
+function randomImgNameGenerator() {
+  return crypto.randomBytes(10).toString("hex");
 }
 
 const s3 = new S3Client({
-  credentials:{
+  credentials: {
     accessKeyId: AWS_ACCESS_KEY,
-    secretAccessKey: SECRET_AWS_ACCESS_KEY
+    secretAccessKey: SECRET_AWS_ACCESS_KEY,
   },
-  region: BUCKET_REGION
-})
+  region: BUCKET_REGION,
+});
 
 app.use(
   cors({
@@ -54,16 +54,17 @@ app.post("/signup", async (req, res) => {
   try {
     const { username, password } = req.body;
     const userDoc = await User.create({ username, password });
-    res.json(userDoc);
-    
+    res.json({ message: "Successful sign-up!", userDoc });
   } catch (err) {
-    
-    if (err.errorResponse.errmsg.includes("username" && "duplicate")) {
+    // check for duplicated username
+    if (err.errorResponse.errmsg.includes("username")) {
       res
         .status(400)
-         .json({ error:err.errorResponse.errmsg });
-        //.json({ error: "Username taken! Login or get a new one :)" });
+        .json({ error: "Username taken! Login or get a new one :)" });
     }
+
+    // display error anyways
+    res.status(500).json({ error: err });
   }
 });
 
@@ -110,10 +111,10 @@ app.post("/logout", async (req, res) => {
 app.post("/create", uploadMiddleware.single("file"), async (req, res) => {
   try {
     // we have to extract the form data into 3 parts:
-    
+
     // image file, user id, and everything else.
 
-    const randomImgName = randomImgNameGenerator()
+    const randomImgName = randomImgNameGenerator();
 
     // 1. Creating the Image Object
     const command = new PutObjectCommand({
@@ -121,11 +122,11 @@ app.post("/create", uploadMiddleware.single("file"), async (req, res) => {
       Key: `imgs/${randomImgName}`, // S3 doesn't allow 2 images of the same name
       Body: req.file.buffer, // file body
       ContentType: req.file.mimetype, // content type
-    })
+    });
     // 1.2 creating the img URL (that can be visited anywhere on the web)
-    const imageURL = `https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/imgs/${randomImgName}`
+    const imageURL = `https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/imgs/${randomImgName}`;
     // 1.3 uploading the image to Amazon S3 Bucket
-    await s3.send(command)
+    await s3.send(command);
 
     // 2. Aquiring User Id (Who Created the Post)
     const token = req.cookies.token;
@@ -160,7 +161,6 @@ app.get("/create", async (req, res) => {
 });
 
 // display individual post
-
 app.get("/post/:id", async (req, res) => {
   const { id } = req.params;
   const post = await Post.findById(id).populate("author", "username");
@@ -197,6 +197,25 @@ app.post("/comments", uploadMiddleware.none(), async (req, res) => {
     res.status(401).json({ message: err.message });
   }
 });
+
+// user accessing their profile
+app.get("/profile", async (req, res) => {
+  try{
+     // getting the user id inside mongoDB from the cookies
+  const token = req.cookies.token;
+  const decodedToken = jwt.verify(token, SECRET_KEY);
+  const userId = decodedToken.id;
+
+  // giving back all the user's posts
+  const posts = await Post.find({author: userId})
+  res.json(posts)
+
+  } catch(err){
+    res.status(400).json({error: err})
+  }
+});
+
+//
 
 app.listen(PORT, () =>
   console.log(`Server is running on http://localhost:${PORT}`)

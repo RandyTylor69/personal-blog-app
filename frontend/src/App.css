@@ -229,6 +229,10 @@ main {
 }
 
 .loading {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 20rem;
   color: rgb(131, 143, 176);
   font-size: 2rem;
 }
@@ -404,9 +408,6 @@ main {
   color: rgb(23, 23, 23);
 }
 .profile-section .log-out-button {
-  display: flex;
-  align-items: center;
-  text-align: center;
   width: 14vh;
   height: 3vh;
   border: solid 2px rgb(230, 229, 217);

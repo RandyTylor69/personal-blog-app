@@ -22,7 +22,7 @@ function App() {
         <Route path="/login" element={<Login username = {username} setUsername = {setUsername}/>} />
         <Route path="/create" element={<CreatePost />} />
         <Route path="/post/:id" element={<Post username = {username}/>} />
-        <Route path="/profile" element={<Profile username = {username} setUsername = {setUsername} posts = {posts} setPosts = {setPosts}/>} />
+        <Route path="/profile" element={<Profile username = {username} setUsername = {setUsername} />} />
       </Routes>
     </>
   );

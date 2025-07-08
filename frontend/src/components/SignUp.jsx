@@ -20,8 +20,8 @@ export default function SignUp(props) {
         alert(data.error)
         return;
       }
-      alert("successful sign up!")
-      props.setUsername(data.username)
+      alert(data.message)
+      props.setUsername(data.userDoc.username)
       setRedirect(true)
       
     } catch (e) {
