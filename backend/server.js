@@ -215,7 +215,11 @@ app.get("/profile", async (req, res) => {
   }
 });
 
-//
+// for cron-job
+
+app.get("/", (req,res)=>{
+  res.status(200).send("Server is awake. The work is mysterious and important.")
+})
 
 app.listen(PORT, () =>
   console.log(`Server is running on http://localhost:${PORT}`)
