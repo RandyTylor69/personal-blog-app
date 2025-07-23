@@ -1,9 +1,17 @@
-import Posts from "./Posts";
+import Featured from "./Featured";
+import Archive from "./Archive";
+import React from "react";
 
 export default function Home(props) {
+  const [homeView, setHomeView] = React.useState(true); // true: featured; false: archive
+
   return (
     <main>
-      <Posts posts = {props.posts} setPosts = {props.setPosts} />
+      {homeView ? (
+        <Featured posts={props.posts} setPosts={props.setPosts} />
+      ) : (
+        <Archive />
+      )}
     </main>
   );
 }

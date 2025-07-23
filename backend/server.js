@@ -171,6 +171,15 @@ app.get("/post/:id", async (req, res) => {
   res.json(postPackage);
 });
 
+app.delete("/post/:id", async (req,res)=>{
+  try{
+    await Post.findByIdAndDelete(req.params.id)
+    res.status(200).json({message: "successful deletion."})
+  } catch(err){
+    res.status(404).json({message:err.message})
+  }
+})
+
 // access comments databse
 app.post("/comments", uploadMiddleware.none(), async (req, res) => {
   // extracts 3 parts of the request body:

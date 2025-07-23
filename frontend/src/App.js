@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import CreatePost from "./components/CreatePost";
 import Post from "./components/Post";
 import Profile from "./components/Profile";
+import Archive from "./components/Archive";
 import React from "react";
 
 import { Route, Routes } from "react-router-dom";
@@ -23,6 +24,7 @@ function App() {
         <Route path="/create" element={<CreatePost />} />
         <Route path="/post/:id" element={<Post username = {username}/>} />
         <Route path="/profile" element={<Profile username = {username} setUsername = {setUsername} />} />
+        <Route path="/archive" element={<Archive />}/>
       </Routes>
     </>
   );

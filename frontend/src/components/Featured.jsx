@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Posts(props) {
+export default function Featured(props) {
 
   React.useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVER_URL}/create`)

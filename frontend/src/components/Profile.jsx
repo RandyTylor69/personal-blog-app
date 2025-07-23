@@ -7,7 +7,7 @@ import { Navigate } from "react-router-dom";
 
 export default function Profile(props) {
   const [deleteWarning, setDeleteWarning] = React.useState(false);
-  const [postToBeDeleted, setPostToBeDeleted] = React.useState([]);
+  const [postToBeDeleted, setPostToBeDeleted] = React.useState(null);
   const [redirect, setRedirect] = React.useState(false);
   const [userPosts, setUserPosts] = React.useState(null);
   let userPostsOverview = null;
@@ -30,7 +30,7 @@ export default function Profile(props) {
 
   // prompts the delete warning window
   function toggleDeleteWarning(post) {
-    console.log("attempt");
+    console.log("post to be deleted:",post)
     setPostToBeDeleted(post);
     setDeleteWarning((prev) => !prev);
   }
