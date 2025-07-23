@@ -3,6 +3,9 @@ import { useEffect } from "react";
 import CreateComment from "./CreateComment";
 import React from "react";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faClock } from "@fortawesome/free-solid-svg-icons";
+
 export default function Post(props) {
   // deese states do be statin'
   const { id } = useParams();
@@ -26,16 +29,15 @@ export default function Post(props) {
   // destructuring objects
   const { title, overview, content } = postData;
 
-
   // mapping comments
   const commentsMapped = commentData.map((comment, key) => {
     return (
       <div className="comment">
-        <p>{`${comment.content} - ${comment.author.username}`}</p>
+        <p>{`${comment.content} - `}
+          <span className="comment-author">{comment.author.username} {comment.createdAt.split("T")[0]}</span>
+        </p>
       </div>
     );
-
-
   });
 
   return (
@@ -51,14 +53,18 @@ export default function Post(props) {
           <img src={postData.file} />
         </div>
       </header>
-      <h3 className="username">{`Written by ${postData.author.username}`}</h3>
+      <h3 className="username">
+        <FontAwesomeIcon icon={faUser} />
+        {` `}
+        {postData.author.username} · <FontAwesomeIcon icon={faClock} />
+        {` `}
+        {postData.createdAt.split("T")[0]}
+      </h3>
       <p className="content">{content}</p>
       <CreateComment postId={id} isLoggedIn={props.username} />
       <div className="comments-page">
         <h3>Comments</h3>
-        <div className="comments-container">
-          {commentsMapped}
-        </div>
+        <div className="comments-container">{commentsMapped}</div>
       </div>
     </div>
   );

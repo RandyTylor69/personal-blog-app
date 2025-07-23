@@ -14,14 +14,13 @@ body {
   align-items: center;
   background-color: rgb(28, 28, 28);
   justify-content: space-between;
-  height: 4rem;
+  height: 6vh;
   width: 100%;
 }
 .web-header .header-container {
   margin: auto;
   display: flex;
-  width: 80vh;
-  max-width: 80vh;
+  width: 80vw;
   justify-content: space-between;
 }
 .web-header .header-container .header-left {
@@ -47,8 +46,8 @@ body {
 main {
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-  margin-top: 6rem;
+  height: 100%;
+  width: auto;
 }
 
 .login-form {
@@ -164,68 +163,6 @@ main {
   border: none;
   border-radius: 0.5rem;
   color: rgb(207, 207, 170);
-}
-
-.post-card {
-  height: 20rem;
-  width: 40rem;
-  border-radius: 2rem;
-  margin: auto;
-  border: 0.4rem rgb(233, 234, 228) solid;
-}
-.post-card .post-card-header {
-  position: relative;
-  height: 10rem;
-  width: auto;
-}
-.post-card .post-card-header img {
-  position: absolute;
-  opacity: 0.4;
-  -o-object-fit: cover;
-     object-fit: cover;
-  width: 100%;
-  height: 100%;
-  border-radius: 2rem;
-  filter: blur(0.2rem);
-  -webkit-mask-image: linear-gradient(black, transparent);
-  mask-image: linear-gradient(black, transparent);
-  z-index: 1;
-}
-.post-card .post-card-header h1 {
-  position: relative;
-  margin-left: 2rem;
-  z-index: 888;
-  color: rgb(233, 234, 228);
-  top: 9rem;
-}
-.post-card .post-card-body {
-  margin: 3rem;
-  height: 7.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.post-card .post-card-body .overview-container {
-  height: 8rem;
-}
-.post-card .post-card-body .overview-container p {
-  color: rgb(207, 207, 170);
-  font-weight: 350;
-}
-.post-card .post-card-body button {
-  border: none;
-  height: 2rem;
-  font-size: 1rem;
-  width: 10rem;
-  border-radius: 0.6rem;
-  cursor: pointer;
-  transition: 0.3s;
-  background-color: rgb(233, 234, 228);
-  color: black;
-}
-.post-card .post-card-body button:hover {
-  scale: 1.5;
 }
 
 .loading {
@@ -344,17 +281,22 @@ main {
 .comments-page .comments-container .comment p {
   color: rgb(230, 229, 217);
 }
+.comments-page .comments-container .comment p span {
+  color: rgba(230, 229, 217, 0.4);
+  scale: 0.8;
+}
 
 .profile-section {
   position: absolute;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10rem;
   left: 0;
   right: 0;
+  height: 70vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 4vh;
 }
 .profile-section h1 {
   color: rgb(230, 229, 217);
@@ -467,4 +409,43 @@ main {
 .delete-warning .warning-buttons button:hover {
   background-color: rgb(230, 229, 217);
   color: rgb(23, 23, 23);
+}
+
+.featured-body {
+  margin-top: 6vh;
+  padding: 0 10vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: rgb(230, 229, 217);
+}
+.featured-body .ft-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6vh;
+  width: 80vw;
+  padding: 2vh 2vw;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+.featured-body .ft-header .to-archive {
+  display: flex;
+  gap: 1vw;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+.featured-body .ft-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30vw, 1fr));
+}
+.featured-body .ft-grid-container .post-card {
+  height: 35vh;
+  border-radius: 2rem;
+  background-size: cover;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: end;
+  padding: 2rem;
 }/*# sourceMappingURL=App.css.map */

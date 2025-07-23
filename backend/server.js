@@ -153,11 +153,24 @@ app.post("/create", uploadMiddleware.single("file"), async (req, res) => {
   }
 });
 
+// getting all posts from database
 app.get("/create", async (req, res) => {
   // grabbing all the posts from database
-  // and sending them to the frontend
   const posts = await Post.find();
-  res.json(posts);
+
+  // adding the author's name to each post object
+  const postsWithAuthorNames = await Promise.all(
+    posts.map(async (post, key) => {
+      const author = await User.findById(post.author.toString());
+      return {
+        // stackoverflow again saved my life here:
+        ...post.toObject(), // turns mongoDB document into js object
+        authorName: author.username,
+      };
+    })
+  );
+
+  res.json(postsWithAuthorNames);
 });
 
 // display individual post
@@ -171,14 +184,14 @@ app.get("/post/:id", async (req, res) => {
   res.json(postPackage);
 });
 
-app.delete("/post/:id", async (req,res)=>{
-  try{
-    await Post.findByIdAndDelete(req.params.id)
-    res.status(200).json({message: "successful deletion."})
-  } catch(err){
-    res.status(404).json({message:err.message})
+app.delete("/post/:id", async (req, res) => {
+  try {
+    await Post.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "successful deletion." });
+  } catch (err) {
+    res.status(404).json({ message: err.message });
   }
-})
+});
 
 // access comments databse
 app.post("/comments", uploadMiddleware.none(), async (req, res) => {
@@ -209,26 +222,27 @@ app.post("/comments", uploadMiddleware.none(), async (req, res) => {
 
 // user accessing their profile
 app.get("/profile", async (req, res) => {
-  try{
-     // getting the user id inside mongoDB from the cookies
-  const token = req.cookies.token;
-  const decodedToken = jwt.verify(token, SECRET_KEY);
-  const userId = decodedToken.id;
+  try {
+    // getting the user id inside mongoDB from the cookies
+    const token = req.cookies.token;
+    const decodedToken = jwt.verify(token, SECRET_KEY);
+    const userId = decodedToken.id;
 
-  // giving back all the user's posts
-  const posts = await Post.find({author: userId})
-  res.json(posts)
-
-  } catch(err){
-    res.status(400).json({error: err})
+    // giving back all the user's posts
+    const posts = await Post.find({ author: userId });
+    res.json(posts);
+  } catch (err) {
+    res.status(400).json({ error: err });
   }
 });
 
 // for cron-job
 
-app.get("/", (req,res)=>{
-  res.status(200).send("Server is awake. The work is mysterious and important.")
-})
+app.get("/", (req, res) => {
+  res
+    .status(200)
+    .send("Server is awake. The work is mysterious and important.");
+});
 
 app.listen(PORT, () =>
   console.log(`Server is running on http://localhost:${PORT}`)
