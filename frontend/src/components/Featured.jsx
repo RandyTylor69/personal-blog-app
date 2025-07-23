@@ -14,30 +14,33 @@ export default function Featured(props) {
   // display the newest post first. So we need to reverse the array.
   const postsArrayReverse = props.posts.slice(0).reverse();
 
-  const allPosts = postsArrayReverse.map((post, key) => 
- 
-      <Link
-        to={`/post/${post._id}`}
-        className="post-card"
-        style={{ backgroundImage: `url(${post.file})` }}
-      >
-        <section className="post-card-body">
-          <h2>{post.title}</h2>
-          <h3>
-            {post.authorName} {post.createdAt.split("T")[0]}
-          </h3>
-        </section>
-      </Link>
-    );
-  ;
-
+  const allPosts = postsArrayReverse.map((post, key) => (
+    <Link
+      to={`/post/${post._id}`}
+      className="post-card"
+      style={{
+        backgroundImage: `linear-gradient(to bottom, transparent, rgba(0,0,0,0.9)),
+                         url(${post.file})`,
+      }}
+    >
+      <section className="post-card-body">
+        <h2>{post.title}</h2>
+        <h3>
+          {post.authorName} {post.createdAt.split("T")[0]}
+        </h3>
+      </section>
+    </Link>
+  ));
   return (
     <div className="featured-body">
       <header className="ft-header">
         <h2>Featured blog posts</h2>
         <div className="to-archive">
           <FontAwesomeIcon icon={faBoxArchive} className="archive-icon" />
-          <h3>Go to blog archive</h3>
+          <Link to={"/archive"}>
+            {" "}
+            <h3>Go to blog archive</h3>
+          </Link>
         </div>
       </header>
       <div className="ft-grid-container">{allPosts}</div>
