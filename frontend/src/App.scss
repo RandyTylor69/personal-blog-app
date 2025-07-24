@@ -298,7 +298,8 @@ main {
   margin-right: auto;
   left: 0;
   right: 0;
-  height: 70vh;
+  margin-top: clamp(2rem, 5vw, 10rem);
+  height: auto;
 
   display: flex;
   justify-content: center;
@@ -307,7 +308,7 @@ main {
 
   h1 {
     color: $blog-gold-color;
-    font-size: 3rem;
+    font-size: clamp(2rem, 8vw, 4rem);
   }
 
   .posts-overview {
@@ -318,24 +319,27 @@ main {
     justify-content: center;
     align-items: center;
     border-radius: 2rem;
-
     gap: 1.5rem;
+
     h2 {
       color: $blog-gold-color;
     }
     .title-section {
       display: flex;
-      width: 30rem;
+      width: clamp(20rem, 60vw, 60rem);
       h2 {
         text-decoration: underline;
+        font-size: clamp(1rem, 4vw, 2rem);
       }
     }
 
     .post-title-card {
       display: flex;
-      width: 30rem;
-      justify-content: space-around;
-
+      width: 100%;
+      justify-content: space-between;
+      padding: 20px 0;
+      border-bottom: 1px solid rgb(255, 255, 255, 0.2);
+      gap: 2rem;
       p {
         color: $blog-gold-color;
         overflow-x: auto;
@@ -343,10 +347,11 @@ main {
       .options {
         display: flex;
         gap: 1rem;
+        justify-content: center;
+        align-items: center;
 
         button {
-          width: 10vh;
-          height: 3vh;
+          padding: 0.5rem;
           border: solid 2px $blog-gold-color;
           color: $blog-gold-color;
           border-radius: 1rem;
@@ -568,6 +573,8 @@ main {
         color: rgb(114, 113, 110);
         font-weight: 200;
         font-size: clamp(0.8rem, 2vw, 1.2rem);
+        overflow-wrap: break-word ;
+        white-space: normal;
       }
     }
   }

@@ -294,7 +294,8 @@ main {
   margin-right: auto;
   left: 0;
   right: 0;
-  height: 70vh;
+  margin-top: clamp(2rem, 5vw, 10rem);
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -302,7 +303,7 @@ main {
 }
 .profile-section h1 {
   color: rgb(230, 229, 217);
-  font-size: 3rem;
+  font-size: clamp(2rem, 8vw, 4rem);
 }
 .profile-section .posts-overview {
   background-color: rgb(18, 18, 18);
@@ -319,15 +320,19 @@ main {
 }
 .profile-section .posts-overview .title-section {
   display: flex;
-  width: 30rem;
+  width: clamp(20rem, 60vw, 60rem);
 }
 .profile-section .posts-overview .title-section h2 {
   text-decoration: underline;
+  font-size: clamp(1rem, 4vw, 2rem);
 }
 .profile-section .posts-overview .post-title-card {
   display: flex;
-  width: 30rem;
-  justify-content: space-around;
+  width: 100%;
+  justify-content: space-between;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  gap: 2rem;
 }
 .profile-section .posts-overview .post-title-card p {
   color: rgb(230, 229, 217);
@@ -336,10 +341,11 @@ main {
 .profile-section .posts-overview .post-title-card .options {
   display: flex;
   gap: 1rem;
+  justify-content: center;
+  align-items: center;
 }
 .profile-section .posts-overview .post-title-card .options button {
-  width: 10vh;
-  height: 3vh;
+  padding: 0.5rem;
   border: solid 2px rgb(230, 229, 217);
   color: rgb(230, 229, 217);
   border-radius: 1rem;
@@ -545,6 +551,8 @@ main {
   color: rgb(114, 113, 110);
   font-weight: 200;
   font-size: clamp(0.8rem, 2vw, 1.2rem);
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .loading-text {

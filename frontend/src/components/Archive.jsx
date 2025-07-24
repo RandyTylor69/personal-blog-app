@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 export default function Archive(props) {
   React.useEffect(() => {
     // Fetching from the same backend endpoint as "Featured.jsx"

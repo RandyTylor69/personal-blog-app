@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import DeleteWindow from "./DeleteWindow";
 import { Navigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan, faArrowPointer, faA, faRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 
 // child of the Home component
 
@@ -47,9 +49,11 @@ export default function Profile(props) {
         <p>{post.title}</p>
         <div className="options">
           <Link to={`/post/${post._id}`}>
-            <button>Read</button>
+            <button>
+              <FontAwesomeIcon icon={faArrowPointer}></FontAwesomeIcon>
+            </button>
           </Link>
-          <button onClick={() => toggleDeleteWarning(post)}>Delete</button>
+          <button onClick={() => toggleDeleteWarning(post)}><FontAwesomeIcon icon={faTrashCan}></FontAwesomeIcon></button>
         </div>
       </section>
     ));
@@ -93,7 +97,7 @@ export default function Profile(props) {
             )}
           </div>
           <button className="log-out-button" onClick={logout}>
-            Log out
+            Log out <FontAwesomeIcon icon={faRightFromBracket}></FontAwesomeIcon>
           </button>
         </main>
       </>
