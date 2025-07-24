@@ -37,6 +37,6 @@ export default function Archive(props) {
       <div className="archive-container">{allArchivePosts}</div>
     </div>
   ) : (
-    <h1>Loading...</h1>
+    <h1 className="loading-text">Loading...</h1>
   );
 }

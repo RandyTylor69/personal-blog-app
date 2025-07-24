@@ -10,7 +10,7 @@ export default function Featured(props) {
       .then((data) => props.setPosts(data));
   }, []);
   let postsArrayReverse = [];
-  
+
   // when all the posts are fetched:
   if (props.posts) {
     // mongoDB adds new post document from the back of the array; we want to
@@ -50,6 +50,6 @@ export default function Featured(props) {
       <div className="ft-grid-container">{allPosts}</div>
     </div>
   ) : (
-    <h1>Loading</h1>
+    <h1 className="loading-text">Loading...</h1>
   );
 }
