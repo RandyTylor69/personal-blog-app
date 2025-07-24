@@ -37,9 +37,12 @@ export default function Featured(props) {
   ));
   return props.posts ? (
     <div className="featured-body">
-      <header className="ft-header">
-        <h1>Featured blog posts</h1>
-        <div className="to-archive">
+      <header className="ft-header-grid">
+        <div className="grid-item-left">
+          <h1>Featured blog posts</h1>
+        </div>
+        
+        <div className="grid-item-right">
           <FontAwesomeIcon icon={faBoxArchive} className="archive-icon" />
           <Link to={"/archive"}>
             {" "}

@@ -16,7 +16,8 @@ body {
   align-items: center;
   background-color: rgb(28, 28, 28);
   justify-content: space-between;
-  height: 6vh;
+  /* Mobile-responsive height arragemen*/
+  height: clamp(3rem, 10vw, 7rem);
   width: 100%;
   .header-container {
     margin: auto;
@@ -27,20 +28,25 @@ body {
       display: flex;
       align-items: center;
       a {
+        h1 {
+          font-weight: 400;
+        }
+
         text-decoration: none;
         color: rgb(131, 176, 135);
+        font-size: clamp(1rem, 3.8vw, 2rem);
       }
     }
     .header-right {
       display: flex;
-      gap: 3rem;
+      gap: 2rem;
 
       align-items: center;
 
       a {
         color: rgb(131, 176, 135);
         text-decoration: none;
-        font-size: 2rem;
+        font-size: clamp(1rem, 3.8vw, 2rem);
         cursor: pointer;
       }
     }
@@ -56,8 +62,7 @@ main {
 
 .login-form {
   margin: 10rem auto;
-  width: 80vh;
-  max-width: 80vh;
+  width: clamp(20rem, 40vh, 80vw);
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -93,8 +98,8 @@ main {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  margin: 5rem auto;
-  max-width: 80vh;
+  margin: clamp(2rem, 5vw, 5rem) auto;
+  width: clamp(8rem, 80vw, 90rem);
 
   input,
   textarea:focus {
@@ -108,17 +113,15 @@ main {
   }
 
   .overview-area {
-    min-height: 15vh;
-    max-height: 15vh;
+    height: clamp(7rem, 10vw, 20rem);
   }
 
   .content-area {
-    min-height: 50vh;
+    height: clamp(12rem, 10vw, 20rem);
   }
 
   textarea {
-    max-width: 80vh;
-    min-width: 80vh;
+    width: clamp(8rem, 80vw, 90rem);
     padding: 2vh;
   }
 
@@ -136,6 +139,7 @@ main {
       padding: 0 1rem;
       cursor: pointer;
       border-radius: 0.5rem;
+      font-size: clamp(0.5rem, 3.8vw, 1.5rem);
     }
 
     button {
@@ -143,10 +147,9 @@ main {
       justify-content: center;
       align-items: center;
       text-align: center;
-      width: 6.5rem;
       cursor: pointer;
-      font-size: 2vh;
-      height: 4rem;
+      font-size: clamp(0.5rem, 3.8vw, 1.5rem);
+      padding: 1rem;
       background-color: rgb(36, 36, 36);
       border: none;
       border-radius: 0.5rem;
@@ -155,7 +158,7 @@ main {
   }
   input,
   textarea {
-    font-size: 2vh;
+    font-size: clamp(0.5rem, 3.8vw, 1.5rem);
     padding-left: 2vh;
     height: 4rem;
     background-color: rgb(36, 36, 36);
@@ -435,28 +438,36 @@ main {
   align-items: center;
   color: $blog-gold-color;
 
-  .ft-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 6vh;
+  .ft-header-grid {
+    row-gap: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30vh, 1fr));
+    margin-bottom: 4vh;
     width: 80vw;
     padding: 2vh 2vw;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
     h1,
     h3 {
       font-weight: 200;
     }
+    .grid-item-left {
+      h1 {
+        font-size: clamp(1.7rem, 3.8vw, 3rem);
+        white-space: nowrap;
+      }
+    }
 
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-    .to-archive {
+    .grid-item-right {
       a {
         color: $blog-gold-color;
         text-decoration: none;
       }
       display: flex;
       gap: 1vw;
-      text-align: center;
+      justify-content: right;
       align-items: center;
-      justify-content: center;
+      padding-right: clamp(2rem, 4vw, 2.5rem);
+      padding-top: 1.5rem;
     }
   }
 
@@ -525,17 +536,25 @@ main {
 
     .archive-card {
       background-color: rgb(28, 28, 28);
-      height: 25vw;
-      width: 90vw;
+      height: auto;
+      width: clamp(22rem, 82vw, 82vw);
       display: flex;
       flex-direction: column;
       border-bottom: 2px solid rgb(60, 60, 60);
-      padding: 4vh 6vw;
-      a {
-        color: $blog-gold-color;
-        text-decoration: none;
-        h1 {
-          font-weight: 400;
+      padding: clamp(0.5rem, 3vw, 3rem);
+
+      span {
+        font-weight: 400;
+        transition: 0.2s;
+        font-size: clamp(1.3rem, 2vw, 2rem);
+        a {
+          color: $blog-gold-color;
+          text-decoration: none;
+          width: auto;
+          &:hover {
+            text-decoration: underline;
+            font-weight: 600;
+          }
         }
       }
       h2 {
@@ -543,10 +562,12 @@ main {
         margin-bottom: 1.5vh;
         color: rgb(114, 113, 110);
         font-weight: 200;
+        font-size: clamp(1rem, 2vw, 1.5rem);
       }
       p {
         color: rgb(114, 113, 110);
         font-weight: 200;
+        font-size: clamp(0.8rem, 2vw, 1.2rem);
       }
     }
   }

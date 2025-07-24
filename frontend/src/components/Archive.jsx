@@ -17,9 +17,9 @@ export default function Archive(props) {
     // Yep. You guessed it. Although modified a lil bit.
     allArchivePosts = archiveArrayReverse.map((post, key) => (
       <div className="archive-card">
-        <Link to={`/post/${post._id}`}>
-          <h1>{post.title}</h1>
-        </Link>
+        <span>
+          <Link to={`/post/${post._id}`}>{post.title}</Link>
+        </span>
 
         <h2>
           {post.authorName} · {post.createdAt.split("T")[0]}
