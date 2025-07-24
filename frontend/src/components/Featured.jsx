@@ -9,10 +9,14 @@ export default function Featured(props) {
       .then((res) => res.json())
       .then((data) => props.setPosts(data));
   }, []);
-
-  // mongoDB adds new post document from the back of the array; we want to
-  // display the newest post first. So we need to reverse the array.
-  const postsArrayReverse = props.posts.slice(0).reverse();
+  let postsArrayReverse = [];
+  
+  // when all the posts are fetched:
+  if (props.posts) {
+    // mongoDB adds new post document from the back of the array; we want to
+    // display the newest post first. So we need to reverse the array.
+    postsArrayReverse = props.posts.slice(0).reverse();
+  }
 
   const allPosts = postsArrayReverse.map((post, key) => (
     <Link
@@ -31,7 +35,7 @@ export default function Featured(props) {
       </section>
     </Link>
   ));
-  return (
+  return props.posts ? (
     <div className="featured-body">
       <header className="ft-header">
         <h1>Featured blog posts</h1>
@@ -45,5 +49,7 @@ export default function Featured(props) {
       </header>
       <div className="ft-grid-container">{allPosts}</div>
     </div>
+  ) : (
+    <h1>Loading</h1>
   );
 }
