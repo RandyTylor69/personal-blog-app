@@ -430,7 +430,7 @@ main {
 }
 
 .featured-body {
-  margin-top: 6vh;
+  margin-top: clamp(1rem, 3vh, 3rem);
   padding: 0 10vw;
   display: flex;
   flex-direction: column;
