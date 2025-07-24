@@ -24,7 +24,7 @@ function App() {
         <Route path="/create" element={<CreatePost />} />
         <Route path="/post/:id" element={<Post username = {username}/>} />
         <Route path="/profile" element={<Profile username = {username} setUsername = {setUsername} />} />
-        <Route path="/archive" element={<Archive />}/>
+        <Route path="/archive" element={<Archive posts = {posts} setPosts={setPosts}/>}/>
       </Routes>
     </>
   );

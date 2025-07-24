@@ -428,6 +428,10 @@ main {
   padding: 2vh 2vw;
   border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
+.featured-body .ft-header h1,
+.featured-body .ft-header h3 {
+  font-weight: 200;
+}
 .featured-body .ft-header .to-archive {
   display: flex;
   gap: 1vw;
@@ -468,4 +472,60 @@ main {
 }
 .featured-body .ft-grid-container .post-card .post-card-body h3 {
   color: rgb(114, 113, 110);
+}
+
+.archive-body {
+  display: flex;
+  flex-direction: column;
+  /* had to manually center this because body is not flexbox*/
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+.archive-body .archive-header {
+  display: flex;
+  margin: 6vh 0;
+  width: 80vw;
+  padding: 2vh 2vw;
+  margin-left: 7vw;
+  color: rgb(230, 229, 217);
+}
+.archive-body .archive-header h1 {
+  font-weight: 200;
+}
+.archive-body .archive-container {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+.archive-body .archive-container .archive-card {
+  background-color: rgb(28, 28, 28);
+  height: 25vw;
+  width: 90vw;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 2px solid rgb(60, 60, 60);
+  padding: 4vh 6vw;
+}
+.archive-body .archive-container .archive-card a {
+  color: rgb(230, 229, 217);
+  text-decoration: none;
+}
+.archive-body .archive-container .archive-card a h1 {
+  font-weight: 400;
+}
+.archive-body .archive-container .archive-card h2 {
+  margin-top: 1vh;
+  margin-bottom: 1.5vh;
+  color: rgb(114, 113, 110);
+  font-weight: 200;
+}
+.archive-body .archive-container .archive-card p {
+  color: rgb(114, 113, 110);
+  font-weight: 200;
 }/*# sourceMappingURL=App.css.map */

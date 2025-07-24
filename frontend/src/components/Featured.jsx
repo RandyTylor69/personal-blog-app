@@ -34,7 +34,7 @@ export default function Featured(props) {
   return (
     <div className="featured-body">
       <header className="ft-header">
-        <h2>Featured blog posts</h2>
+        <h1>Featured blog posts</h1>
         <div className="to-archive">
           <FontAwesomeIcon icon={faBoxArchive} className="archive-icon" />
           <Link to={"/archive"}>

@@ -1,18 +1,11 @@
 import Featured from "./Featured";
 import Archive from "./Archive";
 import React from "react";
-import { Link } from "react-router-dom";
 
 export default function Home(props) {
-  const [homeView, setHomeView] = React.useState(true); // true: featured; false: archive
-
   return (
     <main>
-      {homeView ? (
-        <Featured posts={props.posts} setPosts={props.setPosts} />
-      ) : (
-        <Archive />
-      )}
+      <Featured posts={props.posts} setPosts={props.setPosts} />
     </main>
   );
 }
