@@ -22,7 +22,7 @@ body {
   .header-container {
     margin: auto;
     display: flex;
-    width: 80vw;
+    width: 90vw;
     justify-content: space-between;
     .header-left {
       display: flex;
@@ -181,33 +181,35 @@ main {
 .post-page {
   display: flex;
   flex-direction: column;
-  max-width: 80vh;
-  margin: 5vh auto;
+  max-width: 90vh;
+  margin: auto;
+  margin-top: 1rem;
 
-  header {
+  .post-header {
     display: flex;
     flex-direction: column;
+    padding: 0rem clamp(0.5rem, 2vw, 2rem);
 
     .header-words {
-      display: grid;
-      grid-template-columns: 80% 20%;
+      display: flex;
+      flex-direction: column;
       color: $blog-gold-color;
       h1 {
-        font-size: 4.5rem;
+        font-size: clamp(1.5rem, 4vw, 3rem);
       }
       .overview {
-        margin: auto 0rem;
-        padding-left: 0.5rem;
         border-left: 2px solid rgb(230, 229, 217, 0.3);
         p {
           color: rgb(230, 229, 217, 0.3);
-          margin: 1rem;
-          margin-right: 6;
+          margin: 5px;
+          overflow-wrap: break-word;
+          white-space: normal;
+          font-size: clamp(4px, 3vw, 1.5rem);
         }
       }
     }
     .header-img {
-      height: 20rem;
+      height: clamp(10rem, 20vw, 25rem);
       margin: 2rem 0;
       img {
         height: 100%;
@@ -218,21 +220,27 @@ main {
   }
 
   .username {
-    color: rgb(207, 207, 170);
+    padding: 0rem clamp(0.5rem, 2vw, 2rem);
+    p {
+      color: rgb(165, 165, 136);
+      font-size: clamp(4px, 3vw, 1rem);
+    }
   }
+
   .content {
+    padding: 0rem clamp(0.5rem, 2vw, 2rem);
     white-space: pre-wrap;
     margin: 2rem auto;
     color: rgb(207, 207, 170);
-    min-width: 80vh;
-    max-width: 80vh;
+    width: 100%;
   }
 }
 
 .comment-form {
   display: flex;
   flex-direction: column;
-  max-width: 80vh;
+  margin: auto;
+  width: 95%;
   textarea {
     white-space: pre;
     background-color: rgb(70, 70, 70, 0.5);
@@ -240,10 +248,10 @@ main {
     border-radius: 1rem;
     color: $blog-gold-color;
     padding: 1rem;
-    max-width: 80vh;
-    min-width: 80vh;
     max-height: 20vh;
     min-height: 8vh;
+    overflow-wrap: break-word;
+    white-space: normal;
     &:focus {
       outline: none;
     }
@@ -259,6 +267,7 @@ main {
     cursor: pointer;
     background-color: transparent;
     transition: 0.3s;
+
     &:hover {
       background-color: $blog-gold-color;
       color: rgb(23, 23, 23);
@@ -267,8 +276,7 @@ main {
 }
 
 .comments-page {
-  margin-top: 2rem;
-  max-width: 80vh;
+  margin: 0 1rem;
   h3 {
     margin-top: 1rem;
     color: $blog-gold-color;
@@ -283,9 +291,11 @@ main {
       padding-top: 0.5rem;
       p {
         color: $blog-gold-color;
+        font-size: clamp(6px, 3vw, 14px);
         span {
           color: rgb(230, 229, 217, 0.4);
           scale: 0.8;
+          font-size: clamp(6px, 3vw, 14px);
         }
       }
     }
@@ -576,7 +586,7 @@ main {
         color: rgb(114, 113, 110);
         font-weight: 200;
         font-size: clamp(0.8rem, 2vw, 1.2rem);
-        overflow-wrap: break-word ;
+        overflow-wrap: break-word;
         white-space: normal;
       }
     }

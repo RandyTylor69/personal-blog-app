@@ -33,8 +33,11 @@ export default function Post(props) {
   const commentsMapped = commentData.map((comment, key) => {
     return (
       <div className="comment">
-        <p>{`${comment.content} - `}
-          <span className="comment-author">{comment.author.username} {comment.createdAt.split("T")[0]}</span>
+        <p>
+          {`${comment.content} - `}
+          <span className="comment-author">
+            {comment.author.username} {comment.createdAt.split("T")[0]}
+          </span>
         </p>
       </div>
     );
@@ -42,7 +45,7 @@ export default function Post(props) {
 
   return (
     <div className="post-page">
-      <header>
+      <header className="post-header">
         <div className="header-words">
           <h1>{title}</h1>
           <div className="overview">
@@ -54,11 +57,13 @@ export default function Post(props) {
         </div>
       </header>
       <h3 className="username">
-        <FontAwesomeIcon icon={faUser} />
-        {` `}
-        {postData.author.username} · <FontAwesomeIcon icon={faClock} />
-        {` `}
-        {postData.createdAt.split("T")[0]}
+        <p>
+          <FontAwesomeIcon icon={faUser} />
+          {` `}
+          {postData.author.username} · <FontAwesomeIcon icon={faClock} />
+          {` `}
+          {postData.createdAt.split("T")[0]}
+        </p>
       </h3>
       <p className="content">{content}</p>
       <CreateComment postId={id} isLoggedIn={props.username} />

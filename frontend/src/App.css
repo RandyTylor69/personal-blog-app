@@ -21,7 +21,7 @@ body {
 .web-header .header-container {
   margin: auto;
   display: flex;
-  width: 80vw;
+  width: 90vw;
   justify-content: space-between;
 }
 .web-header .header-container .header-left {
@@ -179,56 +179,63 @@ main {
 .post-page {
   display: flex;
   flex-direction: column;
-  max-width: 80vh;
-  margin: 5vh auto;
+  max-width: 90vh;
+  margin: auto;
+  margin-top: 1rem;
 }
-.post-page header {
+.post-page .post-header {
   display: flex;
   flex-direction: column;
+  padding: 0rem clamp(0.5rem, 2vw, 2rem);
 }
-.post-page header .header-words {
-  display: grid;
-  grid-template-columns: 80% 20%;
+.post-page .post-header .header-words {
+  display: flex;
+  flex-direction: column;
   color: rgb(230, 229, 217);
 }
-.post-page header .header-words h1 {
-  font-size: 4.5rem;
+.post-page .post-header .header-words h1 {
+  font-size: clamp(1.5rem, 4vw, 3rem);
 }
-.post-page header .header-words .overview {
-  margin: auto 0rem;
-  padding-left: 0.5rem;
+.post-page .post-header .header-words .overview {
   border-left: 2px solid rgba(230, 229, 217, 0.3);
 }
-.post-page header .header-words .overview p {
+.post-page .post-header .header-words .overview p {
   color: rgba(230, 229, 217, 0.3);
-  margin: 1rem;
-  margin-right: 6;
+  margin: 5px;
+  overflow-wrap: break-word;
+  white-space: normal;
+  font-size: clamp(4px, 3vw, 1.5rem);
 }
-.post-page header .header-img {
-  height: 20rem;
+.post-page .post-header .header-img {
+  height: clamp(10rem, 20vw, 25rem);
   margin: 2rem 0;
 }
-.post-page header .header-img img {
+.post-page .post-header .header-img img {
   height: 100%;
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
 .post-page .username {
-  color: rgb(207, 207, 170);
+  padding: 0rem clamp(0.5rem, 2vw, 2rem);
+}
+.post-page .username p {
+  color: rgb(165, 165, 136);
+  font-size: clamp(4px, 3vw, 1rem);
 }
 .post-page .content {
+  padding: 0rem clamp(0.5rem, 2vw, 2rem);
   white-space: pre-wrap;
   margin: 2rem auto;
   color: rgb(207, 207, 170);
-  min-width: 80vh;
-  max-width: 80vh;
+  width: 100%;
 }
 
 .comment-form {
   display: flex;
   flex-direction: column;
-  max-width: 80vh;
+  margin: auto;
+  width: 95%;
 }
 .comment-form textarea {
   white-space: pre;
@@ -237,10 +244,10 @@ main {
   border-radius: 1rem;
   color: rgb(230, 229, 217);
   padding: 1rem;
-  max-width: 80vh;
-  min-width: 80vh;
   max-height: 20vh;
   min-height: 8vh;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 .comment-form textarea:focus {
   outline: none;
@@ -263,8 +270,7 @@ main {
 }
 
 .comments-page {
-  margin-top: 2rem;
-  max-width: 80vh;
+  margin: 0 1rem;
 }
 .comments-page h3 {
   margin-top: 1rem;
@@ -282,10 +288,12 @@ main {
 }
 .comments-page .comments-container .comment p {
   color: rgb(230, 229, 217);
+  font-size: clamp(6px, 3vw, 14px);
 }
 .comments-page .comments-container .comment p span {
   color: rgba(230, 229, 217, 0.4);
   scale: 0.8;
+  font-size: clamp(6px, 3vw, 14px);
 }
 
 .profile-section {
