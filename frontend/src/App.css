@@ -15,7 +15,7 @@ body {
   background-color: rgb(28, 28, 28);
   justify-content: space-between;
   /* Mobile-responsive height arragemen*/
-  height: clamp(3rem, 10vw, 7rem);
+  height: clamp(3rem, 8vw, 5rem);
   width: 100%;
 }
 .web-header .header-container {
@@ -31,7 +31,7 @@ body {
 .web-header .header-container .header-left a {
   text-decoration: none;
   color: rgb(131, 176, 135);
-  font-size: clamp(1rem, 3.8vw, 2rem);
+  font-size: clamp(1rem, 3vw, 1.5rem);
 }
 .web-header .header-container .header-left a h1 {
   font-weight: 400;
