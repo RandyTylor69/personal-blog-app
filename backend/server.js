@@ -232,7 +232,7 @@ app.get("/profile", async (req, res) => {
     const posts = await Post.find({ author: userId });
     res.json(posts);
   } catch (err) {
-    res.status(400).json({ error: err });
+    res.status(400).json({ error: err.message });
   }
 });
 

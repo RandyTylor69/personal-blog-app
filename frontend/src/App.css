@@ -337,6 +337,9 @@ main {
 .profile-section .posts-overview .post-title-card p {
   color: rgb(230, 229, 217);
   overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .profile-section .posts-overview .post-title-card .options {
   display: flex;

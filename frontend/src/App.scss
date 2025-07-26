@@ -343,6 +343,9 @@ main {
       p {
         color: $blog-gold-color;
         overflow-x: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
       .options {
         display: flex;

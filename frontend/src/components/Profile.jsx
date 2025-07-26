@@ -71,6 +71,8 @@ export default function Profile(props) {
     setRedirect(true);
   }
 
+  console.log(props.username)
+
   if (redirect) {
     return <Navigate to={"/"} />;
   } else
@@ -83,7 +85,7 @@ export default function Profile(props) {
           />
         )}
         <main className="profile-section">
-          <h1>{props.username}'s Profile</h1>
+          <h1>{props.username ? `${props.username}'s Profile` : `My Profile`}</h1>
           <div className="posts-overview">
             {userPosts ? (
               <>
