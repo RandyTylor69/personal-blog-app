@@ -84,7 +84,11 @@ app.post("/login", async (req, res) => {
         SECRET_KEY
       );
       res
-        .cookie("token", token)
+        .cookie("token", token, {
+          httpOnly: true,
+          secure: true,
+          sameSite: true,
+        })
         .json({ message: "successful log in!", username: userDoc.username });
     }
   } catch (err) {
