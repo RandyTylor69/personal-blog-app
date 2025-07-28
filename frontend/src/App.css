@@ -557,7 +557,7 @@ main {
 }
 .archive-body .archive-header {
   display: flex;
-  margin: 6vh 0;
+  margin: 2rem 0;
   width: 80vw;
   padding: 2vh 2vw;
   margin-left: 7vw;
@@ -621,4 +621,19 @@ main {
   margin-top: 20vh;
   color: rgb(80, 98, 255);
   font-size: 10rem;
+}
+
+.load-more-btn {
+  margin: 3rem;
+  padding: 0.5rem;
+  border: solid 2px rgb(230, 229, 217);
+  color: rgb(230, 229, 217);
+  border-radius: 1rem;
+  cursor: pointer;
+  background-color: transparent;
+  transition: 0.3s;
+}
+.load-more-btn:hover {
+  background-color: rgb(230, 229, 217);
+  color: rgb(23, 23, 23);
 }/*# sourceMappingURL=App.css.map */

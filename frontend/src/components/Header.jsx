@@ -59,6 +59,7 @@ export default function Header(props) {
                 <SearchBar
                   isSearchFocused={isSearchFocused}
                   setIsSearchFocused={setIsSearchFocused}
+                  closeSearchBar={closeSearchBar}
                 />
               )}
               <div className="search-icon">

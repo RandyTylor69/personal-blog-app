@@ -43,7 +43,7 @@ export default function SearchBar(props) {
                   className="search-post-item"
                   to={`/post/${filteredPost._id}`}
                 >
-                  <p>{filteredPost.title}</p>
+                  <p onClick={props.closeSearchBar}>{filteredPost.title}</p>
                 </Link>
               </li>
             ))
