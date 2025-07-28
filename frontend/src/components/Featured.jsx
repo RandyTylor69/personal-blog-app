@@ -20,6 +20,7 @@ export default function Featured(props) {
 
   const allPosts = postsArrayReverse.map((post, key) => (
     <Link
+      key={post.title}
       to={`/post/${post._id}`}
       className="post-card"
       style={{
@@ -41,7 +42,7 @@ export default function Featured(props) {
         <div className="grid-item-left">
           <h1>Featured blog posts</h1>
         </div>
-        
+
         <div className="grid-item-right">
           <FontAwesomeIcon icon={faBoxArchive} className="archive-icon" />
           <Link to={"/archive"}>

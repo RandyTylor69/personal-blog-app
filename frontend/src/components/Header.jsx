@@ -1,13 +1,19 @@
 import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMagnifyingGlass,
   faUser,
   faPenToSquare,
+  faM,
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function Header(props) {
+  // showing / closing the search bar upon toggle icon
+  const [searchBar, setSearchBar] = React.useState(false);
+  // close the search bar upon routing to a different page
+  const [isSearchFocused, setIsSearchFocused] = React.useState(false);
   React.useEffect(() => {
     // check if the user is logged in whenever the page refreshes.
     // this makes sure the header stays updated (showing diff components)
@@ -29,23 +35,44 @@ export default function Header(props) {
     checkLogin();
   }, []);
 
+  function toggleSearchBar() {
+    setSearchBar((prev) => !prev);
+  }
+
+  function closeSearchBar(){
+    setSearchBar(false)
+  }
+
   return (
     <header className="web-header">
       <div className="header-container">
         <div className="header-left">
           <Link to={"/"}>
-            <h1>Blog</h1>
+            <h1 onClick={closeSearchBar}>Blog</h1>
           </Link>
         </div>
         <div className="header-right">
           {props.username ? (
             // if logged in
             <>
+              {searchBar && (
+                <SearchBar
+                  isSearchFocused={isSearchFocused}
+                  setIsSearchFocused={setIsSearchFocused}
+                />
+              )}
+              <div className="search-icon">
+                <FontAwesomeIcon
+                  icon={faMagnifyingGlass}
+                  onClick={toggleSearchBar}
+                />
+              </div>
+
               <Link to={"/create"} title="write new blog post">
-                <FontAwesomeIcon icon={faPenToSquare} />
+                <FontAwesomeIcon icon={faPenToSquare} onClick={closeSearchBar}/>
               </Link>
               <Link to={"/profile"} title="my profile">
-                <FontAwesomeIcon icon={faUser} />
+                <FontAwesomeIcon icon={faUser} onClick={closeSearchBar}/>
               </Link>
             </>
           ) : (

@@ -39,15 +39,64 @@ body {
     }
     .header-right {
       display: flex;
-      gap: 2rem;
+      gap: clamp(1.2rem, 3.8vw, 2rem);
 
       align-items: center;
 
-      a {
+      a,
+      .search-icon {
         color: rgb(131, 176, 135);
         text-decoration: none;
-        font-size: clamp(1rem, 3.8vw, 2rem);
+        font-size: clamp(1.2rem, 3.8vw, 2rem);
         cursor: pointer;
+      }
+      .search-bar-container {
+        display: flex;
+        flex-direction: column;
+        input {
+          border-radius: 12px;
+          border: none;
+          height: 2rem;
+          background-color: rgb(231, 231, 231);
+          width: clamp(6rem, 20vw, 25rem);
+          transition: 0.2s;
+          &:focus {
+            outline: none;
+          }
+        }
+        .no-search-result{
+          color: rgb(200, 200, 200);
+        }
+        ul {
+          padding: 6px;
+          text-decoration: none;
+          width: clamp(6rem, 20vw, 25rem);
+          border-radius: 12px;
+          position: absolute;
+          background-color: rgb(44, 44, 44);
+          margin-top: 2rem;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          z-index: 200000;
+          li {
+
+            .search-post-item{
+              p{
+                font-size: clamp(12px, 2vw, 1rem);
+                color: rgb(226, 226, 226);
+              }
+            }
+            list-style-type: none;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: 0.2s;
+            padding: 4px;
+            &:hover {
+              background-color: rgb(135, 135, 135);
+            }
+          }
+        }
       }
     }
   }
