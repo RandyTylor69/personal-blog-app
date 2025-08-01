@@ -10,8 +10,10 @@ import cookieParser from "cookie-parser";
 import { config } from "dotenv";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import crypto from "crypto";
+import dotenv from "dotenv";
 
-config();
+config()
+dotenv.config({path:"./backend/.env"})
 
 const app = express(); // automatically parses JSON string into an object
 const PORT = process.env.PORT;

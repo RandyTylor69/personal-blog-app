@@ -188,6 +188,11 @@ main {
       color: rgb(207, 207, 170, 0.2);
     }
 
+    .label-body-span{
+      opacity: 0.4;
+      color: $font-gold;
+    }
+
     .submit-class {
       display: flex;
       justify-content: space-between;
@@ -280,6 +285,7 @@ main {
   max-width: 100rem;
   margin: auto;
   margin-top: 1rem;
+
   .post-header {
     display: flex;
     flex-direction: column;
@@ -320,6 +326,7 @@ main {
       color: rgb(165, 165, 136);
       font-size: clamp(4px, 3vw, 1rem);
     }
+    margin-bottom: 2rem;
   }
 
   .content-wrapper {

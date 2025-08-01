@@ -67,9 +67,10 @@ export default function Post(props) {
         </p>
       </h3>
       <section className="content-wrapper">
-          <ReactMarkdown className="markdown-content">{content}</ReactMarkdown>
+        <div className="markdown-content">
+          <ReactMarkdown>{content}</ReactMarkdown>
+        </div>
       </section>
-    
 
       <CreateComment postId={id} isLoggedIn={props.username} />
       <div className="comments-page">

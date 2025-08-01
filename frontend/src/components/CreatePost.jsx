@@ -1,6 +1,8 @@
 import React from "react";
 import { Navigate, redirectDocument } from "react-router-dom";
-import ReactMarkdown from "https://esm.sh/react-markdown@7";
+import ReactMarkdown from "react-markdown";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowPointer } from "@fortawesome/free-solid-svg-icons";
 
 export default function CreatePost() {
   const [title, setTitle] = React.useState("");
@@ -43,7 +45,9 @@ export default function CreatePost() {
           onSubmit={handleSubmit}
           autoComplete="off"
         >
-          <label htmlFor="title" className="input-label">Title</label>
+          <label htmlFor="title" className="input-label">
+            Title
+          </label>
           <input
             name="title"
             placeholder="title"
@@ -52,7 +56,9 @@ export default function CreatePost() {
             maxLength={60}
             required
           />
-          <label htmlFor="title" className="input-label">Overview</label>
+          <label htmlFor="title" className="input-label">
+            Overview
+          </label>
           <textarea
             className="overview-area"
             name="overview"
@@ -63,7 +69,16 @@ export default function CreatePost() {
             maxLength={200}
             draggable="false"
           />
-          <label htmlFor="title" className="input-label">Body</label>
+          <label htmlFor="title" className="input-label">
+            Body{" "}
+            <a
+              href="https://www.markdownguide.org/cheat-sheet/"
+              className="label-body-span"
+            >
+              {`(markdown syntax available)`}
+              <FontAwesomeIcon icon={faArrowPointer} />
+            </a>
+          </label>
           <textarea
             className="content-area"
             name="content"
@@ -90,8 +105,13 @@ export default function CreatePost() {
         {/* --------------PREVIEW------------------*/}
         <div className="post-preview">
           <section className="preview-wrapper">
-            <header><h2>Preview</h2></header>
-            <ReactMarkdown className="markdown-content">{content}</ReactMarkdown>
+            <header>
+              <h2>Preview</h2>
+            </header>
+            <div className="markdown-content">
+              {" "}
+              <ReactMarkdown>{content}</ReactMarkdown>
+            </div>
           </section>
         </div>
       </main>

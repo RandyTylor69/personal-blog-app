@@ -193,6 +193,10 @@ main {
 .create-post-page .create-post-form textarea::placeholder {
   color: rgba(207, 207, 170, 0.2);
 }
+.create-post-page .create-post-form .label-body-span {
+  opacity: 0.4;
+  color: rgb(230, 229, 217);
+}
 .create-post-page .create-post-form .submit-class {
   display: flex;
   justify-content: space-between;
@@ -314,6 +318,7 @@ main {
 }
 .post-page .username {
   padding: 0rem clamp(0.5rem, 2vw, 2rem);
+  margin-bottom: 2rem;
 }
 .post-page .username p {
   color: rgb(165, 165, 136);
