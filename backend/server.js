@@ -132,7 +132,7 @@ app.post("/create", uploadMiddleware.single("file"), async (req, res) => {
     // 1.3 uploading the image to Amazon S3 Bucket
     await s3.send(command);
 
-    // 2. Aquiring User Id (Who Created the Post)
+    // 2. Acquiring User Id (Who Created the Post)
     const token = req.cookies.token;
     const decodedToken = jwt.verify(token, SECRET_KEY);
     const userId = decodedToken.id;

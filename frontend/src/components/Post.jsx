@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import CreateComment from "./CreateComment";
 import React from "react";
+import ReactMarkdown from "https://esm.sh/react-markdown@7";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faClock } from "@fortawesome/free-solid-svg-icons";
@@ -22,7 +23,7 @@ export default function Post(props) {
   }, []);
 
   // loading page while waiting for the data to fetch
-  if (!postData || !setCommentData) {
+  if (!postData || !commentData) {
     return <h1 className="loading">Loading</h1>;
   }
 
@@ -65,7 +66,11 @@ export default function Post(props) {
           {postData.createdAt.split("T")[0]}
         </p>
       </h3>
-      <p className="content">{content}</p>
+      <section className="content-wrapper">
+          <ReactMarkdown className="markdown-content">{content}</ReactMarkdown>
+      </section>
+    
+
       <CreateComment postId={id} isLoggedIn={props.username} />
       <div className="comments-page">
         <h3>Comments</h3>

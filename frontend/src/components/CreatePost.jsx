@@ -1,10 +1,11 @@
 import React from "react";
 import { Navigate, redirectDocument } from "react-router-dom";
+import ReactMarkdown from "https://esm.sh/react-markdown@7";
 
 export default function CreatePost() {
   const [title, setTitle] = React.useState("");
   const [overview, setOverview] = React.useState("");
-  const [content, setContent] = React.useState("");
+  const [content, setContent] = React.useState(""); // goes to preview too
   const [file, setFile] = React.useState(null);
   const [redirect, setRedirect] = React.useState(false);
 
@@ -30,57 +31,69 @@ export default function CreatePost() {
     setRedirect(true);
   }
 
-  console.log(file);
-
   if (redirect) {
     return <Navigate to={"/"} />;
   } else
     return (
-      <form
-        onSubmit={handleSubmit}
-        className="create-post-form"
-        autoComplete="off"
-      >
-        <input
-          name="title"
-          placeholder="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-          maxLength={60}
-        />
-        <textarea
-          className="overview-area"
-          name="overview"
-          placeholder="overview"
-          value={overview}
-          onChange={(e) => setOverview(e.target.value)}
-          required
-          maxLength={200}
-          draggable="false"
-        />
+      <main className="create-post-page">
+        {/* --------------EDITOR------------------*/}
 
-        <textarea
-          className="content-area"
-          name="content"
-          placeholder="Blog away..."
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          required
-        />
-        <div className="submit-class">
-          <label htmlFor="file" className="file-class">
-            Conver Image
-          </label>
+        <form
+          className="create-post-form"
+          onSubmit={handleSubmit}
+          autoComplete="off"
+        >
+          <label htmlFor="title" className="input-label">Title</label>
           <input
-            name="file"
-            id="file"
-            type="file"
-            placeholder="upload"
-            onChange={(e) => setFile(e.target.files[0])}
+            name="title"
+            placeholder="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            maxLength={60}
+            required
           />
-          <button type="submit">Post</button>
+          <label htmlFor="title" className="input-label">Overview</label>
+          <textarea
+            className="overview-area"
+            name="overview"
+            placeholder="overview"
+            value={overview}
+            onChange={(e) => setOverview(e.target.value)}
+            required
+            maxLength={200}
+            draggable="false"
+          />
+          <label htmlFor="title" className="input-label">Body</label>
+          <textarea
+            className="content-area"
+            name="content"
+            placeholder="Blog away..."
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            required
+          />
+          <div className="submit-class">
+            <label htmlFor="file" className="file-class">
+              Conver Image
+            </label>
+            <input
+              name="file"
+              id="file"
+              type="file"
+              placeholder="upload"
+              onChange={(e) => setFile(e.target.files[0])}
+            />
+            <button type="submit">Post</button>
+          </div>
+        </form>
+
+        {/* --------------PREVIEW------------------*/}
+        <div className="post-preview">
+          <section className="preview-wrapper">
+            <header><h2>Preview</h2></header>
+            <ReactMarkdown className="markdown-content">{content}</ReactMarkdown>
+          </section>
         </div>
-      </form>
+      </main>
     );
 }
