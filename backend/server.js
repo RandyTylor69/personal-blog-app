@@ -5,15 +5,17 @@ import multer from "multer";
 import { User } from "./models/User.js";
 import { Post } from "./models/Post.js";
 import { Comment } from "./models/Comment.js";
+import { List } from "./models/List.js";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import { config } from "dotenv";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import crypto from "crypto";
 import dotenv from "dotenv";
+import path from "path";
 
-config()
-dotenv.config({path:"./backend/.env"})
+config();
+dotenv.config({ path: "./backend/.env" });
 
 const app = express(); // automatically parses JSON string into an object
 const PORT = process.env.PORT;
@@ -48,6 +50,7 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
 
 const mongoURI = process.env.MONGODB_URI;
 mongoose.connect(mongoURI);
@@ -83,7 +86,8 @@ app.post("/login", async (req, res) => {
       // if logged in
       const token = jwt.sign(
         { username: username, id: userDoc._id },
-        SECRET_KEY, {expiresIn: '15y'}
+        SECRET_KEY,
+        { expiresIn: "15y" }
       );
       res
         .cookie("token", token, {
@@ -114,7 +118,7 @@ app.post("/logout", async (req, res) => {
   res.cookie("token", "").json({ message: "successful log out!" });
 });
 
-app.post("/create", uploadMiddleware.single("file"), async (req, res) => {
+app.post("/createPost", uploadMiddleware.single("file"), async (req, res) => {
   try {
     // we have to extract the form data into 3 parts:
 
@@ -160,7 +164,7 @@ app.post("/create", uploadMiddleware.single("file"), async (req, res) => {
 });
 
 // getting all posts from database
-app.get("/create", async (req, res) => {
+app.get("/createPost", async (req, res) => {
   // grabbing all the posts from database
   const posts = await Post.find();
 
@@ -248,6 +252,55 @@ app.get("/", (req, res) => {
   res
     .status(200)
     .send("Server is awake. The work is mysterious and important.");
+});
+
+// displaying all lists
+app.get("/lists", async (req, res) => {
+  const lists = await List.find()
+    .populate("author", "username")
+    .populate("content");
+
+  res.json(lists);
+});
+
+// creating new list
+app.post("/createList", uploadMiddleware.none(), async (req, res) => {
+  try {
+    // 1. Getting the user id
+    const token = req.cookies.token;
+    const decodedToken = jwt.verify(token, SECRET_KEY);
+    const userId = decodedToken.id;
+
+    // 2. Getting list information
+    const { name, description, content } = req.body;
+
+    const listDoc = await List.create({
+      author: userId,
+      name: name,
+      description: description,
+      content: content,
+    });
+
+    res.status(201).json({
+      message: "List created!",
+      listDoc,
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.meassage });
+  }
+});
+
+// fetching individual list
+app.get("/list/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const list = await List.findById(id)
+      .populate("author", "username")
+      .populate("content");
+    res.json(list);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 
 app.listen(PORT, () =>

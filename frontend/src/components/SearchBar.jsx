@@ -11,7 +11,7 @@ export default function SearchBar(props) {
   React.useEffect(() => {
     async function getPostTitles() {
       // grabbing all the posts
-      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/create`);
+      const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/createPost`);
       const data = await res.json();
       setPosts(data);
     }

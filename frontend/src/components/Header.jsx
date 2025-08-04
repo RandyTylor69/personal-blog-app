@@ -6,7 +6,7 @@ import {
   faMagnifyingGlass,
   faUser,
   faPenToSquare,
-  faM,
+  faList,
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function Header(props) {
@@ -39,8 +39,8 @@ export default function Header(props) {
     setSearchBar((prev) => !prev);
   }
 
-  function closeSearchBar(){
-    setSearchBar(false)
+  function closeSearchBar() {
+    setSearchBar(false);
   }
 
   return (
@@ -69,11 +69,20 @@ export default function Header(props) {
                 />
               </div>
 
-              <Link to={"/create"} title="write new blog post">
-                <FontAwesomeIcon icon={faPenToSquare} onClick={closeSearchBar}/>
+              <Link to={"/createPost"} title="write new blog post">
+                <FontAwesomeIcon
+                  icon={faPenToSquare}
+                  onClick={closeSearchBar}
+                />
+              </Link>
+              <Link to={"/lists"} title="see all lists">
+                <FontAwesomeIcon
+                  icon={faList}
+                  onClick={closeSearchBar}
+                />
               </Link>
               <Link to={"/profile"} title="my profile">
-                <FontAwesomeIcon icon={faUser} onClick={closeSearchBar}/>
+                <FontAwesomeIcon icon={faUser} onClick={closeSearchBar} />
               </Link>
             </>
           ) : (

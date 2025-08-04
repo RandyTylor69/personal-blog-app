@@ -18,7 +18,7 @@ export default function Archive(props) {
 
   React.useEffect(() => {
     // Fetching from the same backend endpoint as "Featured.jsx"
-    fetch(`${process.env.REACT_APP_SERVER_URL}/create`)
+    fetch(`${process.env.REACT_APP_SERVER_URL}/createPost`)
       .then((res) => res.json())
       .then((data) => {
         props.setPosts(data);
@@ -40,16 +40,16 @@ export default function Archive(props) {
       <div className="archive-container">
         {selectedArchivePosts &&
           selectedArchivePosts.map((post, key) => (
-            <div className="archive-card">
-              <span>
-                <Link to={`/post/${post._id}`}>{post.title}</Link>
-              </span>
+            <Link className="archive-card"to={`/post/${post._id}`}>
+              <h2>
+                {post.title}
+              </h2>
 
               <h2>
                 {post.authorName} · {post.createdAt.split("T")[0]}
               </h2>
               <p>Overview: {post.overview}</p>
-            </div>
+            </Link>
           ))}
         {postsCopy && postsCopy.length > 0 && (
           <button className="load-more-btn" onClick={enlargeSelected}>

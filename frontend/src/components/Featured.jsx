@@ -5,7 +5,7 @@ import { faBoxArchive } from "@fortawesome/free-solid-svg-icons";
 
 export default function Featured(props) {
   React.useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_URL}/create`)
+    fetch(`${process.env.REACT_APP_SERVER_URL}/createPost`)
       .then((res) => res.json())
       .then((data) => props.setPosts(data));
   }, []);

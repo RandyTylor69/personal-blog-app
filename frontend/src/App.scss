@@ -20,12 +20,12 @@ body {
   background-color: rgb(28, 28, 28);
   justify-content: space-between;
   /* Mobile-responsive height arragemen*/
-  height: 3rem;
+  height: 5rem;
   width: 100%;
   .header-container {
     margin: auto;
     display: flex;
-    width: 90vw;
+    width: 80vw;
     justify-content: space-between;
     .header-left {
       display: flex;
@@ -163,7 +163,6 @@ main {
     }
     input,
     textarea {
-      
       font-weight: 300;
       outline: none;
       padding: 8px;
@@ -189,7 +188,7 @@ main {
       color: rgb(207, 207, 170, 0.2);
     }
 
-    .label-body-span{
+    .label-body-span {
       opacity: 0.4;
       color: $font-gold;
     }
@@ -689,6 +688,11 @@ main {
       flex-direction: column;
       border-bottom: 2px solid rgb(60, 60, 60);
       padding: clamp(0.5rem, 3vw, 3rem);
+      text-decoration: none;
+      transition: 0.2s;
+      &:hover {
+        background-color: rgb(50, 50, 50);
+      }
 
       span {
         font-weight: 400;
@@ -707,7 +711,7 @@ main {
       h2 {
         margin-top: 1vh;
         margin-bottom: 1.5vh;
-        color: rgb(114, 113, 110);
+        color: rgb(172, 168, 155);
         font-weight: 200;
         font-size: clamp(1rem, 2vw, 1.5rem);
       }
@@ -745,5 +749,367 @@ main {
   &:hover {
     background-color: $font-gold;
     color: rgb(23, 23, 23);
+  }
+}
+
+.list-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 80vw;
+  margin: auto;
+  margin-top: 1rem;
+
+  .list-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    padding-bottom: 3rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    h1 {
+      font-weight: 300;
+      color: $font-gold;
+      text-align: center;
+    }
+    a {
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 10rem;
+      height: 2rem;
+      border: solid 2px $font-gold;
+      color: $font-gold;
+      border-radius: 1rem;
+      cursor: pointer;
+      background-color: transparent;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: $font-gold;
+        color: rgb(23, 23, 23);
+      }
+    }
+  }
+
+  .list-wrapper {
+    margin: 4rem auto;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    height: 100%;
+    width: 100%;
+    gap: 2rem;
+
+    .list-card {
+      min-height: 20rem;
+      border: 2px solid rgb(230, 230, 230, 0.4);
+      border-radius: 2rem;
+      padding: 1rem;
+      color: $font-gold;
+      text-decoration: none;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      transition: 0.2s ease-out;
+      &:hover {
+        scale: 1.05;
+      }
+
+      .list-card-header {
+        opacity: 0.4;
+        margin-bottom: 1rem;
+      }
+      .list-card-main-section {
+        span {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+}
+
+.create-list-page {
+  margin: auto;
+  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+
+    h1 {
+      font-weight: 300;
+      color: $font-gold;
+      text-align: center;
+    }
+  }
+  .create-list-form {
+    display: flex;
+    flex-direction: column;
+
+    /* upper-wrapper
+          --- .name-and-search
+             --- .name
+             --- .search
+          --- .description-area
+       button
+    **/
+
+    .upper-wrapper {
+      display: flex;
+      gap: 2rem;
+      .input-label {
+        color: $font-gold;
+        margin-bottom: 4px;
+      }
+
+      .name-and-search {
+        display: flex;
+        flex-direction: column;
+
+        .name-area {
+          width: 40vw;
+          font-weight: 300;
+          outline: none;
+          padding: 8px;
+          font-size: clamp(0.9rem, 3vw, 1rem);
+          background-color: transparent;
+          border: 1.8px solid rgb(255, 255, 255, 0.3);
+          border-radius: 0.5rem;
+          color: rgb(240, 240, 240, 0.7);
+          margin-bottom: 1rem;
+        }
+
+        .search-bar-container {
+          display: flex;
+          flex-direction: column;
+          input {
+            border-radius: 12px;
+            border: none;
+            height: 2rem;
+            background-color: rgb(231, 231, 231);
+            width: clamp(6rem, 20vw, 25rem);
+            transition: 0.2s;
+            &:focus {
+              outline: none;
+            }
+          }
+          .no-search-result {
+            color: rgb(200, 200, 200);
+          }
+          ul {
+            padding: 6px;
+            text-decoration: none;
+            width: clamp(6rem, 20vw, 25rem);
+            border-radius: 12px;
+            position: absolute;
+            background-color: rgb(44, 44, 44);
+            margin-top: 4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 200000;
+
+            .search-post-item {
+              p {
+                font-size: clamp(12px, 2vw, 1rem);
+                color: rgb(226, 226, 226);
+              }
+            }
+            list-style-type: none;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: 0.2s;
+            padding: 4px;
+            &:hover {
+              background-color: rgb(135, 135, 135);
+            }
+          }
+        }
+
+        .added-posts-container {
+          background-color: rgb(18, 18, 18);
+          padding: 2rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          border-radius: 1rem;
+          gap: 1.5rem;
+          margin-top: 2rem;
+          min-height: 6.2rem;
+          .post-title-card-LIST {
+            display: flex;
+            color: $font-gold;
+            justify-content: space-between;
+            width: 80%;
+
+            align-items: center;
+            p {
+              overflow: auto;
+            }
+            .options-LIST {
+              display: flex;
+              gap: 1rem;
+              justify-content: center;
+              align-items: center;
+
+              button {
+                padding: 0.5rem;
+                width: 2rem;
+                border: solid 2px $font-gold;
+                color: $font-gold;
+                border-radius: 1rem;
+                cursor: pointer;
+                background-color: transparent;
+                transition: 0.3s;
+                &:hover {
+                  background-color: $font-gold;
+                  color: rgb(23, 23, 23);
+                }
+              }
+            }
+          }
+        }
+      }
+      .description-wrapper {
+        display: flex;
+        flex-direction: column;
+        .input-label {
+          color: $font-gold;
+          margin-bottom: 4px;
+        }
+        .description-area {
+          width: 40vw;
+          min-height: 15rem;
+          font-weight: 300;
+          outline: none;
+          padding: 8px;
+          font-size: clamp(0.9rem, 3vw, 1rem);
+          background-color: transparent;
+          border: 1.8px solid rgb(255, 255, 255, 0.3);
+          border-radius: 0.5rem;
+          color: rgb(240, 240, 240, 0.7);
+          margin-bottom: 1rem;
+        }
+      }
+    }
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 10rem;
+      height: 2rem;
+      border: solid 2px $font-gold;
+      color: $font-gold;
+      border-radius: 1rem;
+      cursor: pointer;
+      background-color: transparent;
+      transition: 0.3s;
+
+      &:hover {
+        background-color: $font-gold;
+        color: rgb(23, 23, 23);
+      }
+    }
+  }
+}
+
+.individual-list {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .il-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 80vw;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    color: $font-gold;
+    font-weight: 300;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    span {
+      color: rgb(72, 71, 65);
+      font-weight: 300;
+    }
+    p {
+      color: rgb(128, 126, 115);
+    }
+  }
+  .il-posts-container {
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+
+    .il-post-card {
+      background-color: rgb(28, 28, 28);
+      height: auto;
+      width: clamp(22rem, 82vw, 82vw);
+      display: flex;
+      flex-direction: column;
+      border-bottom: 2px solid rgb(60, 60, 60);
+      padding: clamp(0.5rem, 3vw, 3rem);
+      gap: 1rem;
+      text-decoration: none;
+      transition: 0.2s;
+      &:hover {
+        background-color: rgb(50, 50, 50);
+      }
+      span {
+        font-weight: 400;
+        transition: 0.2s;
+        font-size: clamp(1.3rem, 2vw, 2rem);
+        a {
+          color: $font-gold;
+          text-decoration: none;
+          width: auto;
+          &:hover {
+            text-decoration: underline;
+            font-weight: 600;
+          }
+        }
+      }
+      h2 {
+        margin-top: 1vh;
+        margin-bottom: 1.5vh;
+        color: rgb(176, 172, 159);
+        font-weight: 200;
+        font-size: clamp(1rem, 2vw, 1.5rem);
+      }
+      p {
+        color: rgb(114, 113, 110);
+        font-weight: 200;
+        font-size: clamp(0.8rem, 2vw, 1.2rem);
+        overflow-wrap: break-word;
+        white-space: normal;
+      }
+    }
   }
 }

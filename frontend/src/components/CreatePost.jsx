@@ -19,7 +19,7 @@ export default function CreatePost() {
       return;
     }
     // fetch request
-    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/create`, {
+    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/createPost`, {
       method: "POST",
       credentials: "include",
       body: formData,
