@@ -170,7 +170,7 @@ main {
   background-color: transparent;
   border: 1.8px solid rgba(255, 255, 255, 0.3);
   border-radius: 0.5rem;
-  color: rgb(207, 207, 170);
+  color: rgba(240, 240, 240, 0.7);
   margin-bottom: 1rem;
   max-width: 100%;
   min-width: 100%;
@@ -240,7 +240,7 @@ main {
   margin-bottom: 1rem;
 }
 .create-post-page .post-preview .preview-wrapper {
-  color: rgba(240, 240, 240, 0.7);
+  color: rgb(230, 229, 217);
   overflow-wrap: break-word;
   line-height: 1.7;
 }
@@ -317,8 +317,9 @@ main {
      object-fit: cover;
 }
 .post-page .username {
-  padding: 0rem clamp(0.5rem, 2vw, 2rem);
   margin-bottom: 2rem;
+  border-bottom: 2px solid rgba(165, 165, 136, 0.5);
+  margin: 0rem clamp(0.5rem, 2vw, 2rem);
 }
 .post-page .username p {
   color: rgb(165, 165, 136);
