@@ -83,7 +83,7 @@ app.post("/login", async (req, res) => {
       // if logged in
       const token = jwt.sign(
         { username: username, id: userDoc._id },
-        SECRET_KEY
+        SECRET_KEY, {expiresIn: '15y'}
       );
       res
         .cookie("token", token, {
