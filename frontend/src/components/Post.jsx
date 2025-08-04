@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import CreateComment from "./CreateComment";
 import React from "react";
-import ReactMarkdown from "https://esm.sh/react-markdown@7";
+import ReactMarkdown from "react-markdown";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faClock } from "@fortawesome/free-solid-svg-icons";
