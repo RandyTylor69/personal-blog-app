@@ -449,6 +449,22 @@ main {
     font-size: clamp(2rem, 8vw, 4rem);
   }
 
+  .content-selection-wrapper {
+    button {
+      padding: 0.5rem;
+      
+      border: solid 2px $font-gold;
+      color: $font-gold;
+      cursor: pointer;
+      background-color: transparent;
+      transition: 0.3s;
+      &:hover {
+        background-color: $font-gold;
+        color: rgb(23, 23, 23);
+      }
+    }
+  }
+
   .posts-overview {
     background-color: rgb(18, 18, 18);
     padding: 2rem;

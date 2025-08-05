@@ -1,12 +1,12 @@
 // child of the Profile component
 
 export default function DeleteWindow(props) {
-  const post = props.postToBeDeleted;
+  const obj = props.itemToBeDeleted; // this is an object {item, type}
 
-  // delete post function
-  async function handleDelete(post) {
+  // delete function
+  async function handleDelete(obj) {
     const res = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/post/${post._id}`,
+      `${process.env.REACT_APP_SERVER_URL}/${obj.type}/${obj.item._id}`,
       {
         credentials: "include",
         method: "DELETE",
@@ -25,7 +25,7 @@ export default function DeleteWindow(props) {
     <div className="delete-warning">
       <p>Sure you want to delete this post? This action is irreversible.</p>
       <section className="warning-buttons">
-        <button onClick={() => handleDelete(post)}>Yes</button>
+        <button onClick={() => handleDelete(obj)}>Yes</button>
         <button onClick={forfeitDelete}>No</button>
       </section>
     </div>

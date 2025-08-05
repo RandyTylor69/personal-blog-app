@@ -3,16 +3,24 @@ import { Link } from "react-router-dom";
 import DeleteWindow from "./DeleteWindow";
 import { Navigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan, faArrowPointer, faA, faRightFromBracket} from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrashCan,
+  faArrowPointer,
+  faA,
+  faRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 
 // child of the Home component
 
 export default function Profile(props) {
   const [deleteWarning, setDeleteWarning] = React.useState(false);
-  const [postToBeDeleted, setPostToBeDeleted] = React.useState(null);
+  const [itemToBeDeleted, setItemToBeDeleted] = React.useState(null);
   const [redirect, setRedirect] = React.useState(false);
   const [userPosts, setUserPosts] = React.useState(null);
+  const [userLists, setUserLists] = React.useState(null);
+  const [contentType, setContentType] = React.useState(true); // true: posts, false: lists
   let userPostsOverview = null;
+  let userListsOverview = null;
 
   // fetching all posts from database with this user
   React.useEffect(() => {
@@ -25,15 +33,16 @@ export default function Profile(props) {
         alert(data.error);
         return;
       }
-      setUserPosts(data);
+      setUserPosts(data.posts);
+      setUserLists(data.lists);
     }
     fetchData();
   }, []);
 
   // prompts the delete warning window
-  function toggleDeleteWarning(post) {
-    console.log("post to be deleted:",post)
-    setPostToBeDeleted(post);
+  function toggleDeleteWarning(item, type) {
+    //console.log("Item to be deleted:", item);
+    setItemToBeDeleted({item, type});
     setDeleteWarning((prev) => !prev);
   }
 
@@ -43,7 +52,7 @@ export default function Profile(props) {
   }
 
   // displaying all post titles
-  if (userPosts.length > 0) {
+  if (userPosts) {
     userPostsOverview = userPosts.map((post, key) => (
       <section className="post-title-card">
         <p>{post.title}</p>
@@ -53,7 +62,26 @@ export default function Profile(props) {
               <FontAwesomeIcon icon={faArrowPointer}></FontAwesomeIcon>
             </button>
           </Link>
-          <button onClick={() => toggleDeleteWarning(post)}><FontAwesomeIcon icon={faTrashCan}></FontAwesomeIcon></button>
+          <button onClick={() => toggleDeleteWarning(post, "post")}>
+            <FontAwesomeIcon icon={faTrashCan}></FontAwesomeIcon>
+          </button>
+        </div>
+      </section>
+    ));
+  }
+  if (userLists) {
+    userListsOverview = userLists.map((list, key) => (
+      <section className="post-title-card">
+        <p>{list.name}</p>
+        <div className="options">
+          <Link to={`/list/${list._id}`}>
+            <button>
+              <FontAwesomeIcon icon={faArrowPointer}></FontAwesomeIcon>
+            </button>
+          </Link>
+          <button onClick={() => toggleDeleteWarning(list, "list")}>
+            <FontAwesomeIcon icon={faTrashCan}></FontAwesomeIcon>
+          </button>
         </div>
       </section>
     ));
@@ -71,8 +99,6 @@ export default function Profile(props) {
     setRedirect(true);
   }
 
-  console.log(props.username)
-
   if (redirect) {
     return <Navigate to={"/"} />;
   } else
@@ -80,14 +106,20 @@ export default function Profile(props) {
       <>
         {deleteWarning && (
           <DeleteWindow
-            postToBeDeleted={postToBeDeleted}
+            itemToBeDeleted={itemToBeDeleted}
             setDeleteWarning={setDeleteWarning}
           />
         )}
         <main className="profile-section">
-          <h1>{props.username ? `${props.username}'s Profile` : `My Profile`}</h1>
+          <h1>
+            {props.username ? `${props.username}'s Profile` : `My Profile`}
+          </h1>
+          <div className="content-selection-wrapper">
+            <button onClick={()=>setContentType(true)}>Posts</button>
+            <button onClick={()=>setContentType(false)}>Lists</button>
+          </div>
           <div className="posts-overview">
-            {userPosts ? (
+            {contentType? (userPosts ? (
               <>
                 <section className="title-section">
                   <h2>Your Blog Posts</h2>
@@ -96,10 +128,21 @@ export default function Profile(props) {
               </>
             ) : (
               <h2>You haven't posted anything yet.</h2>
-            )}
+            )) : (userLists ? (
+              <>
+                <section className="title-section">
+                  <h2>Your Lists</h2>
+                </section>{" "}
+                {userListsOverview}
+              </>
+            ) : (
+              <h2>You haven't made any lists yet.</h2>
+            )) }
+            
           </div>
           <button className="log-out-button" onClick={logout}>
-            Log out <FontAwesomeIcon icon={faRightFromBracket}></FontAwesomeIcon>
+            Log out{" "}
+            <FontAwesomeIcon icon={faRightFromBracket}></FontAwesomeIcon>
           </button>
         </main>
       </>

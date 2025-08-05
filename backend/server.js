@@ -203,6 +203,15 @@ app.delete("/post/:id", async (req, res) => {
   }
 });
 
+app.delete("/list/:id", async (req, res) => {
+  try {
+    await List.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "successful deletion." });
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+});
+
 // access comments databse
 app.post("/comments", uploadMiddleware.none(), async (req, res) => {
   // extracts 3 parts of the request body:
@@ -238,9 +247,11 @@ app.get("/profile", async (req, res) => {
     const decodedToken = jwt.verify(token, SECRET_KEY);
     const userId = decodedToken.id;
 
-    // giving back all the user's posts
+    // gettiing all of user's posts and lists
     const posts = await Post.find({ author: userId });
-    res.json(posts);
+    const lists = await List.find({ author: userId });
+    const userPackage = {posts, lists}
+    res.json(userPackage);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
