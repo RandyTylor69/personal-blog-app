@@ -13,6 +13,7 @@ body {
 .web-header {
   /* STICKY */
   position: sticky;
+  z-index: 1000;
   top: 0;
   display: flex;
   justify-content: center;
