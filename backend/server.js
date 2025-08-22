@@ -95,7 +95,7 @@ app.post("/login", async (req, res) => {
           secure: true,
           sameSite: "None",
         })
-        .json({ message: "successful log in!", username: userDoc.username });
+        .json({ message: "successful log in!", userDoc }); //username: userDoc.username
     }
   } catch (err) {
     console.log(err);
@@ -183,6 +183,40 @@ app.get("/createPost", async (req, res) => {
   res.json(postsWithAuthorNames);
 });
 
+app.post("/editPost/:id", uploadMiddleware.single("file"), async (req, res) => {
+  const { id } = req.params; // getting the post id
+
+  // we have to extract the form data into 3 parts:
+
+  // image file, user id, and everything else.
+  // 1. Creating the Image Object
+  const randomImgName = randomImgNameGenerator();
+  const command = new PutObjectCommand({
+    Bucket: BUCKET_NAME, // destination
+    Key: `imgs/${randomImgName}`, // S3 doesn't allow 2 images of the same name
+    Body: req.file.buffer, // file body
+    ContentType: req.file.mimetype, // content type
+  });
+
+  // 1.2 creating the img URL (that can be visited anywhere on the web)
+  const file = `https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/imgs/${randomImgName}`;
+  
+  // 1.3 uploading the image to Amazon S3 Bucket
+  await s3.send(command);
+
+  // 2. Obtaining the rest
+  const { title, overview, content } = req.body;
+
+  const updatedPost = await Post.findByIdAndUpdate(
+    id,
+    { $set: { title, overview, content, file } }, // updating with formData
+    { new: true } // return an updated document
+  );
+
+  if (!updatedPost) return res.status(404).json({ error: "Post not found!" });
+  res.json({ message: "Post updated successfully!", post: updatedPost });
+});
+
 // display individual post
 app.get("/post/:id", async (req, res) => {
   const { id } = req.params;
@@ -250,7 +284,7 @@ app.get("/profile", async (req, res) => {
     // gettiing all of user's posts and lists
     const posts = await Post.find({ author: userId });
     const lists = await List.find({ author: userId });
-    const userPackage = {posts, lists}
+    const userPackage = { posts, lists, userId };
     res.json(userPackage);
   } catch (err) {
     res.status(400).json({ error: err.message });

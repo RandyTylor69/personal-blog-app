@@ -25,6 +25,10 @@ export default function Login(props) {
       }
       // logged in:
       props.setUsername(data.username);
+
+      // setting the user id for global userId context
+      props.setUserId(data.userDoc._id)
+
       alert("successful log-in!");
       setRedirect(true);
 
@@ -32,6 +36,10 @@ export default function Login(props) {
       console.error(e.message);
     }
   }
+
+
+
+
   if (redirect) {
     return <Navigate to={"/"} />;
   } else

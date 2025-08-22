@@ -347,14 +347,32 @@ main {
   -o-object-fit: cover;
      object-fit: cover;
 }
-.post-page .username {
+.post-page .author-info {
   margin-bottom: 2rem;
   border-bottom: 2px solid rgba(165, 165, 136, 0.5);
   margin: 0rem clamp(0.5rem, 2vw, 2rem);
 }
-.post-page .username p {
+.post-page .author-info p {
   color: rgb(165, 165, 136);
   font-size: clamp(4px, 3vw, 1rem);
+}
+.post-page .author-info button {
+  margin-top: 0.5rem;
+  margin-left: 2rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: 3vh;
+  padding: 0 12px;
+  border: solid 2px rgb(165, 165, 136);
+  color: rgb(165, 165, 136);
+  border-radius: 1rem;
+  cursor: pointer;
+  background-color: transparent;
+  transition: 0.3s;
+}
+.post-page .author-info button:hover {
+  background-color: rgb(165, 165, 136);
+  color: rgb(23, 23, 23);
 }
 .post-page .content-wrapper {
   padding: 0rem clamp(0.5rem, 2vw, 2rem);

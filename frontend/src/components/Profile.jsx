@@ -38,6 +38,7 @@ export default function Profile(props) {
     }
     fetchData();
   }, []);
+  
 
   // prompts the delete warning window
   function toggleDeleteWarning(item, type) {

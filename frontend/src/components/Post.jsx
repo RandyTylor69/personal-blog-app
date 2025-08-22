@@ -1,8 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useEffect } from "react";
 import CreateComment from "./CreateComment";
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import { userContext } from "../App";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faClock } from "@fortawesome/free-solid-svg-icons";
@@ -11,7 +12,9 @@ export default function Post(props) {
   // deese states do be statin'
   const { id } = useParams();
   const [postData, setPostData] = React.useState(null);
+  const [authorId, setAuthorId] = React.useState(null);
   const [commentData, setCommentData] = React.useState(null);
+  const userId = React.useContext(userContext);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_SERVER_URL}/post/${id}`)
@@ -19,6 +22,8 @@ export default function Post(props) {
       .then((data) => {
         setPostData(data.post);
         setCommentData(data.comments);
+
+        setAuthorId(data.post.author._id);
       });
   }, []);
 
@@ -57,13 +62,19 @@ export default function Post(props) {
           <img src={postData.file} />
         </div>
       </header>
-      <h3 className="username">
+      <h3 className="author-info">
         <p>
           <FontAwesomeIcon icon={faUser} />
           {` `}
           {postData.author.username} · <FontAwesomeIcon icon={faClock} />
           {` `}
           {postData.createdAt.split("T")[0]}
+          {/** --- if the userId and the authorId match, allow edit --- */}
+          {userId === authorId && (
+            <Link to={`/edit/${postData._id}`}>
+              <button> Edit Post </button>
+            </Link>
+          )}
         </p>
       </h3>
       <section className="content-wrapper">

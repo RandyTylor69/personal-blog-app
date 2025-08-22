@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigate, redirectDocument } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowPointer } from "@fortawesome/free-solid-svg-icons";
@@ -10,30 +10,60 @@ export default function CreatePost() {
   const [content, setContent] = React.useState(""); // goes to preview too
   const [file, setFile] = React.useState(null);
   const [redirect, setRedirect] = React.useState(false);
+  const { id: postId } = useParams(); // getting post id from the main post page
 
+  // grabbing all the original post info, display them.
+  React.useEffect(() => {
+    fetch(`${process.env.REACT_APP_SERVER_URL}/post/${postId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setTitle(data.post.title);
+        setOverview(data.post.overview);
+        setContent(data.post.content);
+        setFile(data.post.file);
+      });
+  }, []);
+
+  // updating fetch!
   async function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
-    if (formData.get("file").size === 0) {
+
+    if (!file) {
       alert("Please upload a cover image!");
       return;
     }
+
     // fetch request
-    const res = await fetch(`${process.env.REACT_APP_SERVER_URL}/createPost`, {
-      method: "POST",
-      credentials: "include",
-      body: formData,
-    });
+    const res = await fetch(
+      `${process.env.REACT_APP_SERVER_URL}/editPost/${postId}`,
+      {
+        method: "POST",
+        credentials: "include",
+        body: formData,
+      }
+    );
     const data = await res.json();
     if (!res.ok) {
-      alert(data.message);
+      alert(data.error);
       return;
     }
     alert(data.message);
+    console.log(data.post)
     setRedirect(true);
   }
 
-  console.log('author id', );
+
+  React.useEffect(() => {
+    const unloadCallback = (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+      return "";
+    };
+
+    window.addEventListener("beforeunload", unloadCallback);
+    return () => window.removeEventListener("beforeunload", unloadCallback);
+  }, []);
 
   if (redirect) {
     return <Navigate to={"/"} />;
@@ -48,7 +78,7 @@ export default function CreatePost() {
           autoComplete="off"
         >
           <label htmlFor="title" className="input-label">
-            Title
+            Edit Title
           </label>
           <input
             name="title"
@@ -58,9 +88,7 @@ export default function CreatePost() {
             maxLength={60}
             required
           />
-          <label htmlFor="title" className="input-label">
-            Overview
-          </label>
+          <label className="input-label">Edit Overview</label>
           <textarea
             className="overview-area"
             name="overview"
@@ -72,7 +100,7 @@ export default function CreatePost() {
             draggable="false"
           />
           <label htmlFor="title" className="input-label">
-            Body{" "}
+            Edit Body {` `}
             <a
               href="https://www.markdownguide.org/cheat-sheet/"
               className="label-body-span"
@@ -100,12 +128,12 @@ export default function CreatePost() {
               placeholder="upload"
               onChange={(e) => setFile(e.target.files[0])}
             />
-            <button type="submit">Post</button>
+            <button type="submit">Edit</button>
           </div>
           {file && (
             <div className="file-shower">
               <div className="file-shower-item">
-                <p>{file.name}</p>
+                <p>{file.name ? file.name : "old cover img"}</p>
                 <button
                   onClick={() => {
                     setFile(null);

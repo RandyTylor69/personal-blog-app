@@ -20,7 +20,7 @@ export default function Featured(props) {
 
   const allPosts = postsArrayReverse.map((post, key) => (
     <Link
-      key={post.title}
+      key={post._id}
       to={`/post/${post._id}`}
       className="post-card"
       style={{
