@@ -33,6 +33,8 @@ export default function CreatePost() {
     setRedirect(true);
   }
 
+  console.log(file);
+
   if (redirect) {
     return <Navigate to={"/"} />;
   } else
@@ -100,6 +102,20 @@ export default function CreatePost() {
             />
             <button type="submit">Post</button>
           </div>
+          {file && (
+            <div className="file-shower">
+              <div className="file-shower-item">
+                <p>{file.name}</p>
+                <button
+                  onClick={() => {
+                    setFile(null);
+                  }}
+                >
+                  X
+                </button>
+              </div>
+            </div>
+          )}
         </form>
 
         {/* --------------PREVIEW------------------*/}

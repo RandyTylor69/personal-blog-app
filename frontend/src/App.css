@@ -227,6 +227,36 @@ main {
   border-radius: 0.5rem;
   color: rgb(207, 207, 170);
 }
+.create-post-page .create-post-form .file-shower {
+  padding: 8px;
+  font-size: clamp(0.9rem, 3vw, 1rem);
+  background-color: transparent;
+  border: 1.8px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.5rem;
+  color: rgba(240, 240, 240, 0.7);
+  margin-bottom: 1rem;
+  max-width: 100%;
+  min-width: 100%;
+}
+.create-post-page .create-post-form .file-shower .file-shower-item {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+.create-post-page .create-post-form .file-shower .file-shower-item button {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: transparent;
+  border: 1.8px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+.create-post-page .create-post-form .file-shower .file-shower-item button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
 .create-post-page .post-preview {
   display: flex;
   flex-direction: column;

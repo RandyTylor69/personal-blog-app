@@ -225,6 +225,40 @@ main {
         color: rgb(207, 207, 170);
       }
     }
+
+    .file-shower {
+      padding: 8px;
+      font-size: clamp(0.9rem, 3vw, 1rem);
+      background-color: transparent;
+      border: 1.8px solid rgb(255, 255, 255, 0.3);
+      border-radius: 0.5rem;
+      color: rgb(240, 240, 240, 0.7);
+      margin-bottom: 1rem;
+      max-width: 100%;
+      min-width: 100%;
+
+      .file-shower-item{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+
+        button{
+          width: 1.5rem;
+          height: 1.5rem;
+          background-color: transparent;
+          border: 1.8px solid rgb(255, 255, 255, 0.3);
+          border-radius: 50%;
+          text-align: center;
+          color:rgb(255, 255, 255, 0.3);
+          cursor: pointer;
+          &:hover{
+            background-color: rgb(255, 255, 255, 0.3);
+            
+          }
+        }
+      }
+    }
   }
 
   .post-preview {
@@ -453,7 +487,7 @@ main {
   .content-selection-wrapper {
     button {
       padding: 0.5rem;
-      
+
       border: solid 2px $font-gold;
       color: $font-gold;
       cursor: pointer;
