@@ -38,7 +38,7 @@ export default function CreatePost() {
     // fetch request
 
 
-/*     const res = await fetch(
+    const res = await fetch(
       `${process.env.REACT_APP_SERVER_URL}/editPost/${postId}`,
       {
         method: "POST",
@@ -53,7 +53,7 @@ export default function CreatePost() {
     }
     alert(data.message);
     console.log(data.post);
-    setRedirect(true); */
+    setRedirect(true);
   }
 
   React.useEffect(() => {
