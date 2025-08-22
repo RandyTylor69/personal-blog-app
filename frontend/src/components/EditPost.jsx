@@ -34,8 +34,11 @@ export default function CreatePost() {
       return;
     }
 
+
     // fetch request
-    const res = await fetch(
+
+
+/*     const res = await fetch(
       `${process.env.REACT_APP_SERVER_URL}/editPost/${postId}`,
       {
         method: "POST",
@@ -49,10 +52,9 @@ export default function CreatePost() {
       return;
     }
     alert(data.message);
-    console.log(data.post)
-    setRedirect(true);
+    console.log(data.post);
+    setRedirect(true); */
   }
-
 
   React.useEffect(() => {
     const unloadCallback = (event) => {

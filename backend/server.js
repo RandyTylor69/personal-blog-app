@@ -13,6 +13,7 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import crypto from "crypto";
 import dotenv from "dotenv";
 import path from "path";
+import { type } from "os";
 
 config();
 dotenv.config({ path: "./backend/.env" });
@@ -184,38 +185,51 @@ app.get("/createPost", async (req, res) => {
 });
 
 app.post("/editPost/:id", uploadMiddleware.single("file"), async (req, res) => {
-  const { id } = req.params; // getting the post id
+  try {
+    const { id } = req.params; // getting the post id
+    const { title, overview, content, file} = req.body;
+    let newFileString; // reserved if the user updated their cover image.
 
-  // we have to extract the form data into 3 parts:
+    // regarding "file": it could be a string, or an object.
+    // 1 -- It's string if the user didn't update their cover image, meaning it remains a URL string.
+    // 2 -- It's an object if the user did update their cover image, meaning it has a buffer field,
+    //         and needs to be converted to a new URL.
 
-  // image file, user id, and everything else.
-  // 1. Creating the Image Object
-  const randomImgName = randomImgNameGenerator();
-  const command = new PutObjectCommand({
-    Bucket: BUCKET_NAME, // destination
-    Key: `imgs/${randomImgName}`, // S3 doesn't allow 2 images of the same name
-    Body: req.file.buffer, // file body
-    ContentType: req.file.mimetype, // content type
-  });
+    // Scenario 2:
+    if (req.file) {
 
-  // 1.2 creating the img URL (that can be visited anywhere on the web)
-  const file = `https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/imgs/${randomImgName}`;
-  
-  // 1.3 uploading the image to Amazon S3 Bucket
-  await s3.send(command);
+      const randomImgName = randomImgNameGenerator();
+      const command = new PutObjectCommand({
+        Bucket: BUCKET_NAME, // destination
+        Key: `imgs/${randomImgName}`, // S3 doesn't allow 2 images of the same name
+        Body: req.file.buffer, // file body
+        ContentType: req.file.mimetype, // content type
+      });
 
-  // 2. Obtaining the rest
-  const { title, overview, content } = req.body;
+      // 1.2 creating the img URL (that can be visited anywhere on the web)
+      newFileString = `https://${BUCKET_NAME}.s3.${BUCKET_REGION}.amazonaws.com/imgs/${randomImgName}`;
 
-  const updatedPost = await Post.findByIdAndUpdate(
-    id,
-    { $set: { title, overview, content, file } }, // updating with formData
-    { new: true } // return an updated document
-  );
+      // 1.3 uploading the image to Amazon S3 Bucket
+      await s3.send(command);
+    }
 
-  if (!updatedPost) return res.status(404).json({ error: "Post not found!" });
-  res.json({ message: "Post updated successfully!", post: updatedPost });
+    const updatedPost = await Post.findByIdAndUpdate(
+      id,
+      {
+        $set:{title, overview, content, file: req.file? newFileString : file }
+      }, // updating with formData
+      { new: true } // return an updated document
+    );
+
+    if (!updatedPost) return res.status(404).json({ error: "Post not found!" });
+
+    res.json({ message: "Post updated successfully!", post: updatedPost }); 
+  } catch (err) {
+    res.json({ message: err.message });
+  }
 });
+
+
 
 // display individual post
 app.get("/post/:id", async (req, res) => {
