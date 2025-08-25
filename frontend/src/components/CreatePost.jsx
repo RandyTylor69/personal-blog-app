@@ -11,6 +11,17 @@ export default function CreatePost() {
   const [file, setFile] = React.useState(null);
   const [redirect, setRedirect] = React.useState(false);
 
+  React.useEffect(() => {
+    const unloadCallback = (event) => {
+      event.preventDefault();
+      event.returnValue = "";
+      return "";
+    };
+
+    window.addEventListener("beforeunload", unloadCallback);
+    return () => window.removeEventListener("beforeunload", unloadCallback);
+  }, []);
+
   async function handleSubmit(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -33,7 +44,7 @@ export default function CreatePost() {
     setRedirect(true);
   }
 
-  console.log('author id', );
+  console.log("author id");
 
   if (redirect) {
     return <Navigate to={"/"} />;

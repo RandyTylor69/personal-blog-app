@@ -5,8 +5,10 @@ import React from "react";
 import ReactMarkdown from "react-markdown";
 import { userContext } from "../App";
 
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faClock } from "@fortawesome/free-solid-svg-icons";
+
 
 export default function Post(props) {
   // deese states do be statin'
